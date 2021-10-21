@@ -1,0 +1,21 @@
+.infoTripContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.detailTripContainer {
+  width: fit-content;
+}
+
+.detailTripContainer > span {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.infoTripContainer > div > p {
+  font-weight: 700;
+  font-size: 13px;
+  color: #a8a8a8;
+  margin-bottom: 0;
+}

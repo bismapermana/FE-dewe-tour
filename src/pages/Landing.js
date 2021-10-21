@@ -1,12 +1,10 @@
 import React from "react";
 import CardContent from "../components/molecules/CardContent";
 import CardInformation from "../components/molecules/CardInformation";
-import NavbarComp from "../components/NavbarComp";
 
 const landing = () => {
   return (
     <div>
-      <NavbarComp />
       <div style={{ marginTop: "-50px", marginBottom: "150px" }}>
         <CardInformation />
       </div>
