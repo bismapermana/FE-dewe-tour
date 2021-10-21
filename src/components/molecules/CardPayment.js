@@ -2,13 +2,13 @@ import React from "react";
 import { Card, Container, Image, Row, Col } from "react-bootstrap";
 import logo from "../../assets/Logo.png";
 import barcode from "../../assets/barcode.png";
-import "./CardHistoryTrip.css";
+import "./CardPayment.css";
 
-const CardHistoryTrip = () => {
+const CardPayment = () => {
   return (
     <div>
       <div className="d-flex justify-content-center mt-5 pb-5">
-        <Card style={{ width: "1050px", height: "500px" }}>
+        <Card style={{ width: "1050px", height: "470px" }}>
           <Container className="m-3 w-100">
             <Row className="d-flex justify-content-between">
               <Col md={4}>
@@ -102,12 +102,24 @@ const CardHistoryTrip = () => {
               <Col md={2}>
                 <p className="text-information">081318804790</p>
               </Col>
-              <Col md={2}>
-                <p className="text-information">
+              <Col md={1}>
+                <p className="text-information" style={{ color: "black" }}>
                   <b>Qty</b>
                 </p>
               </Col>
-              <Col md={2}></Col>
+              <Col md={3}>
+                <div className="d-flex">
+                  <p
+                    className="text-information mr-4"
+                    style={{ color: "black" }}
+                  >
+                    <b> : </b>
+                  </p>
+                  <p className="text-information" style={{ color: "black" }}>
+                    <b> 1 </b>
+                  </p>
+                </div>
+              </Col>
             </Row>
             <hr
               style={{
@@ -116,6 +128,30 @@ const CardHistoryTrip = () => {
                 marginTop: "-5px",
               }}
             />
+            <Row className="d-flex justify-content-between text-left ">
+              <Col md={1}></Col>
+              <Col md={2}></Col>
+              <Col md={2}></Col>
+              <Col md={2}></Col>
+              <Col md={1}>
+                <p className="text-information" style={{ color: "black" }}>
+                  <b>Total</b>
+                </p>
+              </Col>
+              <Col md={3}>
+                <div className="d-flex">
+                  <p
+                    className="text-information mr-4"
+                    style={{ color: "black" }}
+                  >
+                    <b> : </b>
+                  </p>
+                  <p className="text-information" style={{ color: "#FF0000" }}>
+                    <b> IDR. 12,398,000 </b>
+                  </p>
+                </div>
+              </Col>
+            </Row>
           </Container>
         </Card>
       </div>
@@ -123,4 +159,4 @@ const CardHistoryTrip = () => {
   );
 };
 
-export default CardHistoryTrip;
+export default CardPayment;

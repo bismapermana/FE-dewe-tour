@@ -1,12 +1,13 @@
 import React from "react";
-import CardHistoryTrip from "../../components/molecules/CardHistoryTrip";
+import CardPayment from "../../components/molecules/CardPayment";
 import CardUser from "../../components/molecules/CardUser";
 
 const UserProfile = () => {
   return (
     <div>
       <CardUser />
-      <CardHistoryTrip />
+      <h1 style={{ margin: "130px  0 30px 230px" }}>History Trip</h1>
+      <CardPayment />
     </div>
   );
 };
