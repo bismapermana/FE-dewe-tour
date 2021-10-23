@@ -1,14 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import "./Modal.css";
 
 const ModalSignin = (props) => {
+  const [item, setItem] = useState({
+    email: "",
+    password: "",
+  });
+
+  const data = props.data;
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+    setItem({
+      ...item,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleIsLogin = (e) => {
+    e.preventDefault();
+    const dataUser = data.find((user) => {
+      if (user.email === item.email && user.password === item.password) {
+        return user;
+      } else {
+        return null;
+      }
+    });
+    if (dataUser !== null) {
+      props.dispatch({ type: "LOGIN_SUCCESS", payload: dataUser });
+      props.handleCloseLogin();
+    } else {
+      alert("email or password incorrect");
+    }
+  };
+
   return (
     <div>
       <Modal show={props.showLogin} onHide={props.handleCloseLogin}>
         <h1 className="text-center mt-4 text-modal-title">Sign In </h1>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleIsLogin}>
             <Form.Group controlId="formBasicEmail" className="mb-4">
               <p className="mb-1">
                 <b>Email</b>
@@ -16,6 +48,8 @@ const ModalSignin = (props) => {
               <input
                 className="form-style w-100 py-2 rounded form-input"
                 type="email"
+                name="email"
+                onChange={handleOnChange}
               />
             </Form.Group>
 
@@ -26,14 +60,15 @@ const ModalSignin = (props) => {
               <input
                 className="form-style w-100 py-2 rounded form-input"
                 type="password"
-                rafc
+                name="password"
+                onChange={handleOnChange}
               />
             </Form.Group>
 
             <Button
               variant="warning"
-              onClick={props.handleCloseLogin}
               className="w-100 mt-4 py-2 btn-style"
+              type="submit"
             >
               Sign In
             </Button>

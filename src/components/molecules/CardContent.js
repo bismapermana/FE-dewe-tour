@@ -2,9 +2,9 @@ import React from "react";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import { useHistory } from "react-router";
 import "./CardContent.css";
+import data from "../../json/tour.json";
 
 const CardContent = () => {
-  const data = require("../../json/tour.json");
   let history = useHistory();
 
   const handleClickDetail = (id) => {
