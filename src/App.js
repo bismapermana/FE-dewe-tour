@@ -9,6 +9,7 @@ import UserProfile from "./pages/user/UserProfile";
 import Payment from "./pages/user/Payment";
 import ListTransaction from "./pages/admin/ListTransaction";
 import IncomeTrip from "./pages/admin/IncomeTrip";
+import AddTrip from "./pages/admin/AddTrip";
 
 const App = () => {
   return (
@@ -17,11 +18,12 @@ const App = () => {
         <NavbarComp />
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/detail" component={TripDetail} />
+          <Route exact path="/detail/:id" component={TripDetail} />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/payment" component={Payment} />
           <Route exact path="/list" component={ListTransaction} />
           <Route exact path="/income" component={IncomeTrip} />
+          <Route exact path="/addtrip" component={AddTrip} />
         </Switch>
         <FooterComp />
       </BrowserRouter>

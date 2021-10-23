@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import "./PriceTrip.css";
 
-const PriceTrip = () => {
-  const initialPrice = 12000000;
-
+const PriceTrip = (props) => {
+  const initialPrice = props.price;
   const [quantity, setQuantity] = useState(1);
-  //   const [price, setPrice] = useState(initialPrice * quantity);
+
+  console.log(props.quota);
+
   const increment = () => {
-    setQuantity(quantity + 1);
+    if (props.quota > quantity) {
+      setQuantity(quantity + 1);
+    }
   };
 
   const decrement = () => {
@@ -17,12 +20,22 @@ const PriceTrip = () => {
     }
   };
 
+  const totalPrice = initialPrice * quantity;
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(price);
+  };
+
   return (
     <div>
       <div className="d-flex bd-highlight align-items-baseline  ">
         <div className="bd-hightlight">
           <span style={{ color: "#FFAF00", fontSize: "25px" }}>
-            <b>IDR. {initialPrice} </b>
+            <b> {formatPrice(initialPrice)} </b>
           </span>
           <span>/ Person</span>
         </div>
@@ -58,7 +71,7 @@ const PriceTrip = () => {
           style={{ color: "#FFAF00", fontSize: "25px" }}
         >
           <span>
-            <b>{initialPrice * quantity}</b>
+            <b>{formatPrice(totalPrice)}</b>
           </span>
         </div>
       </div>

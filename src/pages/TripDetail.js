@@ -5,32 +5,45 @@ import content from "../assets/content.png";
 import InformationTrip from "../components/atoms/detailTrip/InformationTrip";
 import DescriptionTrip from "../components/atoms/detailTrip/DescriptionTrip";
 import PriceTrip from "../components/atoms/detailTrip/PriceTrip";
-import { useLocation } from "react-router";
+import { useParams } from "react-router-dom";
+import data from "../json/tour.json";
 
-const Profile = () => {
-  let location = useLocation();
+const TripDetail = () => {
+  const { id } = useParams();
 
-  console.log(location.pathname);
+  const detailData = data.find((item) => item.id === parseInt(id));
 
   return (
     <div>
-      <Container>
+      <Container className="py-4">
         <div className="containerProfile">
           <Row>
             <Col className="ml-3">
-              <p className="text-title">6D/4D Fun Tassie Vacation + Sydney</p>
-              <p className="text-desc ">Australia</p>
+              <p className="text-title">{detailData.title}</p>
+              <p className="text-desc ">{detailData.country}</p>
             </Col>
           </Row>
           <Row>
             <Col>
-              <Image src={content} rounded className="image-content" />
+              <Image
+                src={detailData.image[0]}
+                rounded
+                className="image-content"
+              />
             </Col>
           </Row>
           <Row>
             <div className="container-thumbnail">
-              <Image src={content} rounded className="image-thumbnail" />
-              <Image src={content} rounded className="image-thumbnail" />
+              <Image
+                src={detailData.image[1]}
+                rounded
+                className="image-thumbnail"
+              />
+              <Image
+                src={detailData.image[2]}
+                rounded
+                className="image-thumbnail"
+              />
               <Image src={content} rounded className="image-thumbnail" />
             </div>
           </Row>
@@ -43,7 +56,13 @@ const Profile = () => {
           </Row>
           <Row>
             <Col>
-              <InformationTrip />
+              <InformationTrip
+                accomodation={detailData.accomodation}
+                transportation={detailData.transportation}
+                eat={detailData.eat}
+                duration={detailData.duration}
+                dateTrip={detailData.dateTrip}
+              />
             </Col>
           </Row>
           <Row>
@@ -55,12 +74,12 @@ const Profile = () => {
           </Row>
           <Row>
             <Col>
-              <DescriptionTrip />
+              <DescriptionTrip description={detailData.description} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <PriceTrip />
+              <PriceTrip price={detailData.price} quota={detailData.quota} />
             </Col>
           </Row>
         </div>
@@ -69,4 +88,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default TripDetail;

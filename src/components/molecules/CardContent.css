@@ -1,10 +1,10 @@
 .cardContentStyle {
   height: 350px;
   width: 350px;
+  cursor: pointer;
 }
 
 .imageStyle {
-  background-image: url(../../assets/content.png);
   width: 328px;
   height: 241px;
 }

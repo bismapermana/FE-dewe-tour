@@ -5,7 +5,7 @@ import CardInformation from "../components/molecules/CardInformation";
 const landing = () => {
   return (
     <div>
-      <div style={{ marginTop: "-50px", marginBottom: "150px" }}>
+      <div style={{ marginTop: "-50px", marginBottom: "80px" }}>
         <CardInformation />
       </div>
 
@@ -14,7 +14,6 @@ const landing = () => {
           <b>Group Tour</b>
         </h1>
       </div>
-
       <CardContent />
     </div>
   );

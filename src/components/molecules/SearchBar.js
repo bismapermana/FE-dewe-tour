@@ -7,7 +7,7 @@ const SearchBar = () => {
       <Form>
         <Form.Label>Find great places to holiday</Form.Label>
         <Form.Group className="d-flex">
-          <Form.Control size="lg" type="text" style={{ width: "1200px" }} />
+          <Form.Control size="lg" type="text" style={{ width: "1100px" }} />
           <Button variant="warning" size="lg">
             Search
           </Button>
