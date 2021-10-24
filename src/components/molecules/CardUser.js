@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Col, Container, Row, Image, Button } from "react-bootstrap";
 import { CgProfile } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { IoMdCall, IoIosPin } from "react-icons/io";
 import "./CardUser.css";
 import profile from "../../assets/profile.png";
+import { AuthContext } from "../../context/AuthContext";
 
 const CardUser = () => {
+  const [state] = useContext(AuthContext);
+
   return (
     <div>
       <div className="d-flex justify-content-center mt-5 pb-5">
@@ -22,20 +25,20 @@ const CardUser = () => {
               </Col>
               <Col md={4}>
                 <div className=" ml-2">
-                  <p className="text-personal-info">John Doe</p>
+                  <p className="text-personal-info">{state.user.name}</p>
                   <p className="text-profile">Full Name</p>
                 </div>
                 <div className="mt-4 ml-2">
-                  <p className="text-personal-info">John Doe</p>
-                  <p className="text-profile">Full Name</p>
+                  <p className="text-personal-info">{state.user.email}</p>
+                  <p className="text-profile">Email</p>
                 </div>
                 <div className="mt-3 ml-2">
-                  <p className="text-personal-info">John Doe</p>
-                  <p className="text-profile">Full Name</p>
+                  <p className="text-personal-info">{state.user.phone}</p>
+                  <p className="text-profile">Phone</p>
                 </div>
                 <div className="mt-4 ml-2">
-                  <p className="text-personal-info">John Doe</p>
-                  <p className="text-profile">Full Name</p>
+                  <p className="text-personal-info">{state.user.address}</p>
+                  <p className="text-profile">Address</p>
                 </div>
               </Col>
               <Col md={6} className=" ml-5">

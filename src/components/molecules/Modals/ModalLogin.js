@@ -27,7 +27,7 @@ const ModalSignin = (props) => {
         return null;
       }
     });
-    if (dataUser !== null) {
+    if (dataUser) {
       props.dispatch({ type: "LOGIN_SUCCESS", payload: dataUser });
       props.handleCloseLogin();
     } else {

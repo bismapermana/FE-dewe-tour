@@ -1,23 +1,26 @@
 [
   {
     "id": 1,
-    "name": "Bisma",
-    "email": "user1@gmail.com",
+    "name": "admin",
+    "email": "admin@gmail.com",
     "phone": "0812193932",
-    "password": "user123"
+    "address": "",
+    "password": "admin"
   },
   {
     "id": 2,
-    "name": "Ujang",
-    "email": "user2@gmail.com",
+    "name": "Bisma",
+    "email": "user1@gmail.com",
     "phone": "0812193932",
+    "address": "Jl. Tamim No. 71/13D",
     "password": "user123"
   },
   {
     "id": 3,
-    "name": "Asep",
-    "email": "user3@gmail.com",
+    "name": "John Doe",
+    "email": "user2@gmail.com",
     "phone": "0812193932",
+    "address": "Jl. Dago Pakar no 88/2A",
     "password": "user123"
   }
 ]

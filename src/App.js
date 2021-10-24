@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import FooterComp from "./components/FooterComp";
 import Landing from "./pages/Landing";
@@ -10,20 +10,30 @@ import Payment from "./pages/user/Payment";
 import ListTransaction from "./pages/admin/ListTransaction";
 import IncomeTrip from "./pages/admin/IncomeTrip";
 import AddTrip from "./pages/admin/AddTrip";
+import { AuthContext } from "./context/AuthContext";
 
 const App = () => {
+  const [state] = useContext(AuthContext);
+
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <BrowserRouter>
         <NavbarComp />
         <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/detail/:id" component={TripDetail} />
-          <Route exact path="/profile" component={UserProfile} />
-          <Route exact path="/payment" component={Payment} />
-          <Route exact path="/list" component={ListTransaction} />
-          <Route exact path="/income" component={IncomeTrip} />
-          <Route exact path="/addtrip" component={AddTrip} />
+          {state.isLogin === false ? (
+            <>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/detail/:id" component={TripDetail} />
+            </>
+          ) : (
+            <>
+              <Route exact path="/profile" component={UserProfile} />
+              <Route exact path="/payment" component={Payment} />
+              <Route exact path="/list" component={ListTransaction} />
+              <Route exact path="/income" component={IncomeTrip} />
+              <Route exact path="/addtrip" component={AddTrip} />
+            </>
+          )}
         </Switch>
         <FooterComp />
       </BrowserRouter>

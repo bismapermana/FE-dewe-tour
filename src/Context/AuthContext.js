@@ -12,7 +12,6 @@ const reducer = (state, action) => {
 
   switch (type) {
     case "LOGIN_SUCCESS":
-      console.log(payload);
       return {
         isLogin: true,
         user: payload,

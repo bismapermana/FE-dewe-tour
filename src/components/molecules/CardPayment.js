@@ -8,7 +8,7 @@ const CardPayment = () => {
   return (
     <div>
       <div className="d-flex justify-content-center mt-5 pb-5">
-        <Card style={{ width: "1050px", height: "470px" }}>
+        <Card style={{ width: "1050px", height: "580px" }}>
           <Container className="m-3 w-100">
             <Row className="d-flex justify-content-between">
               <Col md={4}>

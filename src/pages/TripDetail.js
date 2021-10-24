@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
+import { AuthContext } from "../context/AuthContext";
+import ModalLogin from "../components/molecules/Modals/ModalLogin";
 import "./TripDetail.css";
 import content from "../assets/content.png";
 import InformationTrip from "../components/atoms/detailTrip/InformationTrip";
@@ -10,9 +12,11 @@ import data from "../json/tour.json";
 
 const TripDetail = () => {
   const { id } = useParams();
-
   const detailData = data.find((item) => item.id === parseInt(id));
-
+  const [state, dispatch] = useContext(AuthContext);
+  const [showLogin, setShowLogin] = useState(false);
+  const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => setShowLogin(false);
   return (
     <div>
       <Container className="py-4">
@@ -79,11 +83,19 @@ const TripDetail = () => {
           </Row>
           <Row>
             <Col>
-              <PriceTrip price={detailData.price} quota={detailData.quota} />
+              <PriceTrip
+                price={detailData.price}
+                quota={detailData.quota}
+                dispatch={dispatch}
+                state={state}
+                handleShowLogin={handleShowLogin}
+                handleCloseLogin={handleCloseLogin}
+              />
             </Col>
           </Row>
         </div>
       </Container>
+      <ModalLogin showLogin={showLogin} handleCloseLogin={handleCloseLogin} />
     </div>
   );
 };

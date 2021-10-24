@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 import "./PriceTrip.css";
 
 const PriceTrip = (props) => {
   const initialPrice = props.price;
   const [quantity, setQuantity] = useState(1);
+  const history = useHistory();
 
-  console.log(props.quota);
+  const handleBook = () => {
+    if (props.state.isLogin === false) {
+      props.handleShowLogin();
+    } else {
+      history.push("/payment");
+      props.handleCloseLogin();
+    }
+  };
+
+  console.log(props.state.isLogin);
 
   const increment = () => {
     if (props.quota > quantity) {
@@ -77,7 +88,12 @@ const PriceTrip = (props) => {
       </div>
       <hr style={{ border: "1px solid #b7b7b7", marginTop: "20px" }} />
       <div className="d-flex justify-content-end">
-        <Button variant="warning" className="button-text" size="lg">
+        <Button
+          variant="warning"
+          className="button-text"
+          size="lg"
+          onClick={handleBook}
+        >
           BOOK NOW
         </Button>
       </div>

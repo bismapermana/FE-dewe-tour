@@ -9,29 +9,21 @@ import ModalLogin from "./molecules/Modals/ModalLogin";
 import ModalRegister from "./molecules/Modals/ModalRegister";
 import SearchBar from "./molecules/SearchBar";
 import "./NavbarComp.css";
+import DropDownUser from "./atoms/DropDownUser";
 
 const NavbarComp = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
   const [state, dispatch] = useContext(AuthContext);
 
-  const handleShowLogin = () => {
-    setShowLogin(true);
-  };
-
-  const handleCloseLogin = () => {
-    setShowLogin(false);
-  };
-
-  const handleShowRegister = () => {
-    setShowRegister(true);
-  };
-
-  const handleCloseRegister = () => {
-    setShowRegister(false);
-  };
+  const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => setShowLogin(false);
+  const handleShowRegister = () => setShowRegister(true);
+  const handleCloseRegister = () => setShowRegister(false);
+  const handleShowDropdown = () => setShowDropdown(true);
 
   return (
     <div>
@@ -39,7 +31,10 @@ const NavbarComp = () => {
         // -----------------------NAVBAR LANDING PAGE----------------------------
         <div className="Nav-landingPage">
           <Navbar collapseOnSelect expand="lg" className="mx-5">
-            <Navbar.Brand onClick={() => history.push("/")}>
+            <Navbar.Brand
+              style={{ cursor: "pointer" }}
+              onClick={() => history.push("/")}
+            >
               <Image src={logo} fluid />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -53,6 +48,8 @@ const NavbarComp = () => {
                   name={state.user.name}
                   className="rounded-circle"
                   size="40"
+                  onClick={handleShowDropdown}
+                  style={{ cursor: "pointer" }}
                 />
               ) : (
                 //-----------------------IS NOT LOGIN --------------------------
@@ -93,10 +90,13 @@ const NavbarComp = () => {
           </div>
         </div>
       ) : (
-        //---------------------NAVBAR IS NOT LANDING PAGE -------------------
+        //---------------------NAVBAR IS NOT ON LANDING PAGE -------------------
         <div className="NavImage mb-4">
           <Navbar collapseOnSelect expand="lg" className="mx-5">
-            <Navbar.Brand onClick={() => history.push("/")}>
+            <Navbar.Brand
+              style={{ cursor: "pointer" }}
+              onClick={() => history.push("/")}
+            >
               <Image src={logo} fluid />
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -106,7 +106,13 @@ const NavbarComp = () => {
             >
               {state.isLogin === true ? (
                 //----------------------IS LOGIN ----------------------------------
-                <p bg-dark>profile</p>
+                <Avatar
+                  name={state.user.name}
+                  className="rounded-circle"
+                  size="40"
+                  onClick={handleShowDropdown}
+                  style={{ cursor: "pointer" }}
+                />
               ) : (
                 //----------------------IS NOT LOGIN -------------------------------
                 <Nav>
@@ -146,6 +152,13 @@ const NavbarComp = () => {
         showRegister={showRegister}
         handleShowRegister={handleShowRegister}
         handleCloseRegister={handleCloseRegister}
+      />
+
+      <DropDownUser
+        showDropdown={showDropdown}
+        setShowDropdown={setShowDropdown}
+        dispatch={dispatch}
+        state={state}
       />
     </div>
   );
