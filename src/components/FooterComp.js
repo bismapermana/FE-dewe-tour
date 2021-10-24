@@ -7,7 +7,7 @@ const FooterComp = () => {
         style={{
           backgroundColor: "#FFAF00",
           padding: "1px",
-          position: "absolute",
+
           width: "100%",
         }}
       >

@@ -20,6 +20,11 @@ const DropDownUser = (props) => {
     onHide();
   };
 
+  const handleClickTrip = () => {
+    history.push("/income");
+    onHide();
+  };
+
   const handleClickProfile = () => {
     history.push("/profile");
     onHide();
@@ -34,6 +39,7 @@ const DropDownUser = (props) => {
     props.showDropdown && (
       <>
         {status !== "admin" ? (
+          //---------------------------------------IS NOT ADMIN -----------------------------------
           <div>
             <img className="polygon-dropdown" src={polygon} alt="" />
             <div onClick={onHide} className="overlay-dropdown" />
@@ -60,11 +66,12 @@ const DropDownUser = (props) => {
             </div>
           </div>
         ) : (
+          //---------------------------------------------- IS ADMIN ----------------------------------
           <div>
             <img className="polygon-dropdown" src={polygon} alt="" />
             <div onClick={onHide} className="overlay-dropdown" />
             <div className="container-dropdown-admin rounded shadow">
-              <Dropdown.Item>
+              <Dropdown.Item onClick={handleClickTrip}>
                 <Image src={path} className="mr-3 mb-1" />
                 <span>
                   <b>Trip</b>

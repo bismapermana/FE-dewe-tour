@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
+import { useHistory } from "react-router";
 import "./Modal.css";
 
 const ModalSignin = (props) => {
@@ -7,6 +8,8 @@ const ModalSignin = (props) => {
     email: "",
     password: "",
   });
+
+  const history = useHistory();
 
   const data = props.data;
 
@@ -30,6 +33,10 @@ const ModalSignin = (props) => {
     if (dataUser) {
       props.dispatch({ type: "LOGIN_SUCCESS", payload: dataUser });
       props.handleCloseLogin();
+      if (dataUser.name === "admin") {
+        history.push("/list");
+        props.handleCloseLogin();
+      }
     } else {
       alert("email or password incorrect");
     }

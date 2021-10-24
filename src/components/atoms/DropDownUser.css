@@ -1,5 +1,5 @@
 .container-dropdown {
-  position: fixed;
+  position: absolute;
   height: 190px;
   width: 200px;
   background-color: #ffff;
@@ -10,7 +10,7 @@
 }
 
 .container-dropdown-admin {
-  position: fixed;
+  position: absolute;
   height: 150px;
   width: 200px;
   background-color: #ffff;
@@ -31,7 +31,7 @@
 }
 
 .polygon-dropdown {
-  position: fixed;
+  position: absolute;
   right: 3.5em;
   top: 3.5em;
   z-index: 1;

@@ -5,7 +5,7 @@ const ListTransaction = () => {
   return (
     <div>
       <div className="d-flex justify-content-center py-5 ">
-        <div style={{ width: "1200px" }}>
+        <div style={{ width: "1200px", height: "100vh" }}>
           <TableTransaction />
         </div>
       </div>

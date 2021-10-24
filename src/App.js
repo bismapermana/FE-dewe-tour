@@ -11,11 +11,9 @@ import ListTransaction from "./pages/admin/ListTransaction";
 import IncomeTrip from "./pages/admin/IncomeTrip";
 import AddTrip from "./pages/admin/AddTrip";
 import { AuthContext } from "./context/AuthContext";
-import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const [state] = useContext(AuthContext);
-  console.log(state);
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
@@ -23,28 +21,43 @@ const App = () => {
         <Switch>
           {(() => {
             if (state.isLogin === false) {
+              //-----------------------------------IS NOT LOGIN ---------------------------------------------------------
               return (
                 <>
                   <NavbarComp />
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/detail/:id" component={TripDetail} />
-                  <Route exact component={PageNotFound} />
+
                   <FooterComp />
                 </>
               );
             } else {
+              //--------------------------------IS LOGIN ------------------------------------------------------------
               return (
                 <>
-                  <NavbarComp />
-                  <Route exact path="/" component={Landing} />
-                  <Route exact path="/detail/:id" component={TripDetail} />
-                  <Route exact path="/profile" component={UserProfile} />
-                  <Route exact path="/payment" component={Payment} />
-                  <Route exact path="/list" component={ListTransaction} />
-                  <Route exact path="/income" component={IncomeTrip} />
-                  <Route exact path="/addtrip" component={AddTrip} />
-                  <Route exact component={PageNotFound} />
-                  <FooterComp />
+                  {state.user.name !== "admin" ? (
+                    //-------------------------------------IS NOT ADMIN ----------------------------------------
+                    <>
+                      <NavbarComp />
+                      <Route exact path="/" component={Landing} />
+                      <Route exact path="/detail/:id" component={TripDetail} />
+                      <Route exact path="/profile" component={UserProfile} />
+                      <Route exact path="/payment" component={Payment} />
+
+                      <FooterComp />
+                    </>
+                  ) : (
+                    //-------------------------------------IS ADMIN -----------------------------------
+                    <>
+                      <NavbarComp />
+                      <Route exact path="/income" component={IncomeTrip} />
+                      <Route exact path="/detail/:id" component={TripDetail} />
+                      <Route exact path="/list" component={ListTransaction} />
+                      <Route exact path="/addtrip" component={AddTrip} />
+
+                      <FooterComp style={{ height: "100vh" }} />
+                    </>
+                  )}
                 </>
               );
             }
