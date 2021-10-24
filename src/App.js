@@ -11,31 +11,45 @@ import ListTransaction from "./pages/admin/ListTransaction";
 import IncomeTrip from "./pages/admin/IncomeTrip";
 import AddTrip from "./pages/admin/AddTrip";
 import { AuthContext } from "./context/AuthContext";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   const [state] = useContext(AuthContext);
+  console.log(state);
 
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <BrowserRouter>
-        <NavbarComp />
         <Switch>
-          {state.isLogin === false ? (
-            <>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/detail/:id" component={TripDetail} />
-            </>
-          ) : (
-            <>
-              <Route exact path="/profile" component={UserProfile} />
-              <Route exact path="/payment" component={Payment} />
-              <Route exact path="/list" component={ListTransaction} />
-              <Route exact path="/income" component={IncomeTrip} />
-              <Route exact path="/addtrip" component={AddTrip} />
-            </>
-          )}
+          {(() => {
+            if (state.isLogin === false) {
+              return (
+                <>
+                  <NavbarComp />
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/detail/:id" component={TripDetail} />
+                  <Route exact component={PageNotFound} />
+                  <FooterComp />
+                </>
+              );
+            } else {
+              return (
+                <>
+                  <NavbarComp />
+                  <Route exact path="/" component={Landing} />
+                  <Route exact path="/detail/:id" component={TripDetail} />
+                  <Route exact path="/profile" component={UserProfile} />
+                  <Route exact path="/payment" component={Payment} />
+                  <Route exact path="/list" component={ListTransaction} />
+                  <Route exact path="/income" component={IncomeTrip} />
+                  <Route exact path="/addtrip" component={AddTrip} />
+                  <Route exact component={PageNotFound} />
+                  <FooterComp />
+                </>
+              );
+            }
+          })()}
         </Switch>
-        <FooterComp />
       </BrowserRouter>
     </div>
   );
