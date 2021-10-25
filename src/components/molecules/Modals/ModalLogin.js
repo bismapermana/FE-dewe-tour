@@ -9,6 +9,8 @@ const ModalSignin = (props) => {
     password: "",
   });
 
+  const getNewUser = localStorage.getItem("user");
+
   const history = useHistory();
 
   const data = props.data;
@@ -38,7 +40,7 @@ const ModalSignin = (props) => {
         props.handleCloseLogin();
       }
     } else {
-      alert("email or password incorrect");
+      alert("Email or Password incorrect");
     }
   };
 
