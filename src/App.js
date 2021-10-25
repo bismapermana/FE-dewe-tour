@@ -27,8 +27,7 @@ const App = () => {
                   <NavbarComp />
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/detail/:id" component={TripDetail} />
-
-                  <FooterComp />
+                  <FooterComp style={{ height: "100vh" }} />
                 </>
               );
             } else {
@@ -43,18 +42,15 @@ const App = () => {
                       <Route exact path="/detail/:id" component={TripDetail} />
                       <Route exact path="/profile" component={UserProfile} />
                       <Route exact path="/payment" component={Payment} />
-
-                      <FooterComp />
+                      <FooterComp style={{ height: "100vh" }} />
                     </>
                   ) : (
                     //-------------------------------------IS ADMIN -----------------------------------
                     <>
                       <NavbarComp />
                       <Route exact path="/income" component={IncomeTrip} />
-                      <Route exact path="/detail/:id" component={TripDetail} />
                       <Route exact path="/list" component={ListTransaction} />
                       <Route exact path="/addtrip" component={AddTrip} />
-
                       <FooterComp style={{ height: "100vh" }} />
                     </>
                   )}

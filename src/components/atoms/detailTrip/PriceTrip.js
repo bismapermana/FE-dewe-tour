@@ -17,8 +17,6 @@ const PriceTrip = (props) => {
     }
   };
 
-  console.log(props.state.isLogin);
-
   const increment = () => {
     if (props.quota > quantity) {
       setQuantity(quantity + 1);

@@ -60,6 +60,7 @@ const CardContent = () => {
                   </div>
                 </Card>
               ) : (
+                //-------------------------------------- USER ---------------------------------
                 <Card
                   className="cardContentStyle"
                   style={{ cursor: "pointer" }}

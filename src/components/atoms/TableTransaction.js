@@ -19,10 +19,10 @@ const TableTransaction = () => {
         <tbody>
           <tr>
             <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <td>Bisma</td>
+            <td>6D / 4N Fun Tassie Vacation </td>
+            <td>bca.jpg</td>
+            <td>Approve</td>
             <td>
               <BiSearch size={"2em"} style={{ color: "#2FC5F7" }} />
             </td>
