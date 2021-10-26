@@ -8,7 +8,7 @@ import logo from "../../src/assets/logoDeweTour.png";
 import ModalLogin from "./molecules/Modals/ModalLogin";
 import ModalRegister from "./molecules/Modals/ModalRegister";
 import SearchBar from "./molecules/SearchBar";
-import "./NavbarComp.css";
+import "./Navbars.css";
 import DropDownUser from "./atoms/DropDownUser";
 
 const NavbarComp = () => {

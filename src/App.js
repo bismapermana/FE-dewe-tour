@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import FooterComp from "./components/FooterComp";
+import Footer from "./components/Footer";
 import Landing from "./pages/Landing";
-import NavbarComp from "./components/NavbarComp";
+import Navbars from "./components/Navbars";
 import TripDetail from "./pages/TripDetail";
 import "./App.css";
 import UserProfile from "./pages/user/UserProfile";
@@ -25,11 +25,11 @@ const App = () => {
               //-----------------------------------IS NOT LOGIN ---------------------------------------------------------
               return (
                 <>
-                  <NavbarComp />
+                  <Navbars />
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/detail/:id" component={TripDetail} />
                   <Route exact path="/modal" component={ModalApprove} />
-                  <FooterComp style={{ height: "100vh" }} />
+                  <Footer style={{ height: "100vh" }} />
                 </>
               );
             } else {
@@ -39,21 +39,21 @@ const App = () => {
                   {state.user.name !== "admin" ? (
                     //-------------------------------------IS NOT ADMIN ----------------------------------------
                     <>
-                      <NavbarComp />
+                      <Navbars />
                       <Route exact path="/" component={Landing} />
                       <Route exact path="/detail/:id" component={TripDetail} />
                       <Route exact path="/profile" component={UserProfile} />
                       <Route exact path="/payment" component={Payment} />
-                      <FooterComp style={{ height: "100vh" }} />
+                      <Footer style={{ height: "100vh" }} />
                     </>
                   ) : (
                     //-------------------------------------IS ADMIN -----------------------------------
                     <>
-                      <NavbarComp />
+                      <Navbars />
                       <Route exact path="/income" component={IncomeTrip} />
                       <Route exact path="/list" component={ListTransaction} />
                       <Route exact path="/addtrip" component={AddTrip} />
-                      <FooterComp style={{ height: "100vh" }} />
+                      <Footer style={{ height: "100vh" }} />
                     </>
                   )}
                 </>

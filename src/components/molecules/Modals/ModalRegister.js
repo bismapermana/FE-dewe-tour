@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Image } from "react-bootstrap";
+import palm from "../../../assets/palm.png";
+import hibiscus from "../../../assets/hibiscus.png";
 
 const ModalRegister = (props) => {
-  console.log(props);
   const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     phone: "",
+    address: "",
   });
 
   const handleOnChange = (e) => {
@@ -19,15 +21,24 @@ const ModalRegister = (props) => {
   };
 
   const handleOnRegister = (e) => {
-    localStorage.setItem("user", JSON.stringify(data));
+    const users = [];
+    const user = localStorage.getItem("user");
+    const dataUsers = JSON.parse(user);
+
+    if (dataUsers !== null) {
+      users.push(...dataUsers);
+    }
+
+    users.push(data);
+    localStorage.setItem("user", JSON.stringify(users));
     props.handleCloseRegister();
   };
-
-  console.log(data);
 
   return (
     <div>
       <Modal show={props.showRegister} onHide={props.handleCloseRegister}>
+        <Image src={palm} className="background-palm" />
+        <Image src={hibiscus} className="background-hibiscus" />
         <h1 className="text-center mt-4 text-modal-title">Sign Up</h1>
         <Modal.Body>
           <Form>
@@ -65,6 +76,17 @@ const ModalRegister = (props) => {
               />
             </Form.Group>
 
+            <Form.Group>
+              <p className="mb-1">
+                <b>Address</b>
+              </p>
+              <input
+                className="form-style w-100 py-2 rounded form-input"
+                type="textarea"
+                name="address"
+                onChange={handleOnChange}
+              />
+            </Form.Group>
             <Form.Group controlId="formBasicPassword">
               <p className="mb-1">
                 <b>Password</b>
@@ -74,7 +96,6 @@ const ModalRegister = (props) => {
                 type="password"
                 name="password"
                 onChange={handleOnChange}
-                rafc
               />
             </Form.Group>
 

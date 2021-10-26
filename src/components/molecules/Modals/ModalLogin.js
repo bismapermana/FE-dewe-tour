@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Form, Button, Image } from "react-bootstrap";
 import { useHistory } from "react-router";
 import "./Modal.css";
+import palm from "../../../assets/palm.png";
+import hibiscus from "../../../assets/hibiscus.png";
 
 const ModalSignin = (props) => {
   const [item, setItem] = useState({
@@ -9,11 +11,7 @@ const ModalSignin = (props) => {
     password: "",
   });
 
-  const getNewUser = localStorage.getItem("user");
-
   const history = useHistory();
-
-  const data = props.data;
 
   const handleOnChange = (e) => {
     e.preventDefault();
@@ -25,13 +23,12 @@ const ModalSignin = (props) => {
 
   const handleIsLogin = (e) => {
     e.preventDefault();
-    const dataUser = data.find((user) => {
-      if (user.email === item.email && user.password === item.password) {
-        return user;
-      } else {
-        return null;
-      }
-    });
+    const getDatas = localStorage.getItem("user");
+    const datas = JSON.parse(getDatas);
+    const dataUser = datas?.find(
+      (user) => user.email === item.email && user.password === item.password
+    );
+
     if (dataUser) {
       props.dispatch({ type: "LOGIN_SUCCESS", payload: dataUser });
       props.handleCloseLogin();
@@ -47,6 +44,10 @@ const ModalSignin = (props) => {
   return (
     <div>
       <Modal show={props.showLogin} onHide={props.handleCloseLogin}>
+        <Modal.Title>
+          <Image src={palm} className="background-palm" />
+          <Image src={hibiscus} className="background-hibiscus" />
+        </Modal.Title>
         <h1 className="text-center mt-4 text-modal-title">Sign In </h1>
         <Modal.Body>
           <Form onSubmit={handleIsLogin}>

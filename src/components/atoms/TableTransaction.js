@@ -29,7 +29,10 @@ const TableTransaction = () => {
             <td>bca.jpg</td>
             <td>Approve</td>
             <td onClick={handleShow}>
-              <BiSearch size={"2em"} style={{ color: "#2FC5F7" }} />
+              <BiSearch
+                size={"2em"}
+                style={{ color: "#2FC5F7", cursor: "pointer" }}
+              />
             </td>
           </tr>
         </tbody>

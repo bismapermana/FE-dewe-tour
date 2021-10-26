@@ -21,6 +21,21 @@
   background-color: #e5e5e5;
 }
 
+.background-palm {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+}
+.background-hibiscus {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
