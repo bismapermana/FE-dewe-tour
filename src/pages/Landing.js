@@ -1,10 +1,13 @@
 import React from "react";
+import Footer from "../components/Footer";
 import CardContent from "../components/molecules/CardContent";
 import CardInformation from "../components/molecules/CardInformation";
+import NavbarComp from "../components/Navbars";
 
 const landing = () => {
   return (
     <div>
+      <NavbarComp />
       <div style={{ marginTop: "-50px", marginBottom: "80px" }}>
         <CardInformation />
       </div>
@@ -15,6 +18,7 @@ const landing = () => {
         </h1>
       </div>
       <CardContent />
+      <Footer />
     </div>
   );
 };

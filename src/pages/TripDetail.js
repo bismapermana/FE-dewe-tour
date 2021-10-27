@@ -9,6 +9,8 @@ import DescriptionTrip from "../components/atoms/detailTrip/DescriptionTrip";
 import PriceTrip from "../components/atoms/detailTrip/PriceTrip";
 import { useParams } from "react-router-dom";
 import data from "../json/tour.json";
+import NavbarComp from "../components/Navbars";
+import Footer from "../components/Footer";
 
 const TripDetail = () => {
   const { id } = useParams();
@@ -19,6 +21,8 @@ const TripDetail = () => {
   const handleCloseLogin = () => setShowLogin(false);
   return (
     <div>
+      <NavbarComp />
+
       <Container className="py-4">
         <div className="containerProfile">
           <Row>
@@ -95,6 +99,8 @@ const TripDetail = () => {
           </Row>
         </div>
       </Container>
+
+      <Footer />
       <ModalLogin showLogin={showLogin} handleCloseLogin={handleCloseLogin} />
     </div>
   );
