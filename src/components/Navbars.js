@@ -5,9 +5,9 @@ import { AuthContext } from "../context/AuthContext";
 import Avatar from "react-avatar";
 import data from "../json/user.json";
 import logo from "../../src/assets/logoDeweTour.png";
-import ModalLogin from "./molecules/Modals/ModalLogin";
-import ModalRegister from "./molecules/Modals/ModalRegister";
-import SearchBar from "./molecules/SearchBar";
+import ModalLogin from "./molecules/modals/ModalLogin";
+import ModalRegister from "./molecules/modals/ModalRegister";
+import SearchBar from "./SearchBar";
 import "./Navbars.css";
 import DropDownUser from "./atoms/DropDownUser";
 

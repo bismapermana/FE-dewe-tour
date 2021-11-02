@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { BiSearch } from "react-icons/bi";
-import ModalApprove from "../molecules/Modals/ModalApprove";
+import ModalApprove from "../molecules/modals/ModalApprove";
 
 const TableTransaction = () => {
   const [showModal, setShowModal] = useState(false);

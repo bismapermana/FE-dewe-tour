@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
-import ModalLogin from "../components/molecules/Modals/ModalLogin";
+import ModalLogin from "../components/molecules/modals/ModalLogin";
 import "./TripDetail.css";
 import content from "../assets/content.png";
 import InformationTrip from "../components/atoms/detailTrip/InformationTrip";

@@ -47,7 +47,7 @@ const ModalRegister = (props) => {
                 <b>Full Name</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="text"
                 name="name"
                 onChange={handleOnChange}
@@ -58,7 +58,7 @@ const ModalRegister = (props) => {
                 <b>Email</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="email"
                 name="email"
                 onChange={handleOnChange}
@@ -69,7 +69,7 @@ const ModalRegister = (props) => {
                 <b>Phone Number</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="number"
                 name="phone"
                 onChange={handleOnChange}
@@ -81,7 +81,7 @@ const ModalRegister = (props) => {
                 <b>Address</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="textarea"
                 name="address"
                 onChange={handleOnChange}
@@ -92,7 +92,7 @@ const ModalRegister = (props) => {
                 <b>Password</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="password"
                 name="password"
                 onChange={handleOnChange}
@@ -102,7 +102,7 @@ const ModalRegister = (props) => {
             <Button
               variant="warning"
               onClick={handleOnRegister}
-              className="w-100 mt-4 py-2 btn-style"
+              className="w-100 mt-4 p-2 btn-style"
             >
               Sign up
             </Button>

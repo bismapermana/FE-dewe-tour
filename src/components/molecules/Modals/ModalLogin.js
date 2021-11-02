@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Form, Button, Image } from "react-bootstrap";
+import { Modal, Form, Button, Image, Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
 import "./Modal.css";
 import palm from "../../../assets/palm.png";
@@ -10,6 +10,8 @@ const ModalSignin = (props) => {
     email: "",
     password: "",
   });
+
+  const [errorAlert, setErrorAlert] = useState(false);
 
   const history = useHistory();
 
@@ -37,7 +39,10 @@ const ModalSignin = (props) => {
         props.handleCloseLogin();
       }
     } else {
-      alert("Email or Password incorrect");
+      setErrorAlert(true);
+      setTimeout(() => {
+        setErrorAlert(false);
+      }, 5000);
     }
   };
 
@@ -50,13 +55,18 @@ const ModalSignin = (props) => {
         </Modal.Title>
         <h1 className="text-center mt-4 text-modal-title">Sign In </h1>
         <Modal.Body>
+          {errorAlert && (
+            <Alert variant="danger" style={{ height: "50px" }}>
+              <p>Wrong email and password!</p>
+            </Alert>
+          )}
           <Form onSubmit={handleIsLogin}>
             <Form.Group controlId="formBasicEmail" className="mb-4">
               <p className="mb-1">
                 <b>Email</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="email"
                 name="email"
                 onChange={handleOnChange}
@@ -68,7 +78,7 @@ const ModalSignin = (props) => {
                 <b>Password</b>
               </p>
               <input
-                className="form-style w-100 py-2 rounded form-input"
+                className="form-style w-100 p-2 rounded form-input"
                 type="password"
                 name="password"
                 onChange={handleOnChange}

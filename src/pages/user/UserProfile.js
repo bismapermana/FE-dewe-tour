@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../../components/Footer";
-import CardPayment from "../../components/molecules/CardPayment";
-import CardUser from "../../components/molecules/CardUser";
+import CardPayment from "../../components/molecules/cards/CardPayment";
+import CardUser from "../../components/molecules/cards/CardUser";
 import NavbarComp from "../../components/Navbars";
 
 const UserProfile = () => {

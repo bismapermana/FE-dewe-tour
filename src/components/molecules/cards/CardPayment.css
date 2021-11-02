@@ -1,0 +1,32 @@
+.text-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.text-information {
+  font-size: 14px;
+  font-weight: 600;
+  color: #959595;
+  margin-top: -10px;
+  text-align: left;
+}
+
+.text-description {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.text-status {
+  font-size: 12px;
+  font-weight: 800;
+  color: #3cf71e;
+  background: linear-gradient(
+    rgba(59, 247, 30, 0.157),
+    rgba(11, 220, 95, 0.178)
+  );
+  padding: 5px 10px;
+}
+
+.border-line {
+  border: #b7b7b7 2px 50%;
+}

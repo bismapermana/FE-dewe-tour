@@ -51,20 +51,22 @@ const PriceTrip = (props) => {
         <div className="bd-highlight ml-auto mt-3">
           <Button
             variant="warning"
-            className="mr-4 rounded-circle button-text"
+            className="mr-4  button-text"
             onClick={decrement}
+            style={{ width: "40px" }}
           >
-            -
+            <b>-</b>
           </Button>
           <span>
             <b>{quantity}</b>
           </span>
           <Button
             variant="warning"
-            className="ml-4 rounded-circle button-text"
+            className="ml-4  button-text"
             onClick={increment}
+            style={{ width: "40px" }}
           >
-            +
+            <b>+</b>
           </Button>
         </div>
       </div>
@@ -88,9 +90,10 @@ const PriceTrip = (props) => {
       <div className="d-flex justify-content-end">
         <Button
           variant="warning"
-          className="button-text"
+          className="button-text shadow"
           size="lg"
           onClick={handleBook}
+          style={{ color: "white" }}
         >
           BOOK NOW
         </Button>

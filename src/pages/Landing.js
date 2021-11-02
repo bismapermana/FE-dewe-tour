@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../components/Footer";
-import CardContent from "../components/molecules/CardContent";
-import CardInformation from "../components/molecules/CardInformation";
+import CardContent from "../components/molecules/cards/CardContent";
+import CardInformation from "../components/molecules/cards/CardInformation";
 import NavbarComp from "../components/Navbars";
 
 const landing = () => {
