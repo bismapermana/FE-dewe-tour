@@ -1,0 +1,17 @@
+.text-profile {
+  color: #8a8c90;
+  font-weight: 400;
+  margin-top: -15px;
+}
+
+.text-personal-info {
+  color: #050505;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.style-button {
+  color: #ffff;
+  font-weight: bolder;
+  width: 220px;
+}

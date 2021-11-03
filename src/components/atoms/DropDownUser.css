@@ -1,0 +1,38 @@
+.container-dropdown {
+  position: absolute;
+  height: 190px;
+  width: 200px;
+  background-color: #ffff;
+  padding: 15px 5px;
+  top: 4.2em;
+  right: 3em;
+  z-index: 2;
+}
+
+.container-dropdown-admin {
+  position: absolute;
+  height: 150px;
+  width: 200px;
+  background-color: #ffff;
+  padding: 15px 5px;
+  top: 4.2em;
+  right: 3em;
+  z-index: 2;
+}
+
+.overlay-dropdown {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.polygon-dropdown {
+  position: absolute;
+  right: 3.5em;
+  top: 3.5em;
+  z-index: 1;
+}

@@ -1,0 +1,16 @@
+.Nav-landingPage {
+  background: url("../assets/jumbotron.png");
+  height: 530px;
+  width: 100%;
+}
+
+.NavImage {
+  background: url("../assets/jumbotron.png");
+  width: 100%;
+  height: 85px;
+}
+
+.avatar {
+  width: 25px;
+  height: 25px;
+}
