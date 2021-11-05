@@ -38,19 +38,16 @@ const ModalSignin = (props) => {
 
       const getData = await API.get("/user");
 
-      console.log(getData);
-
       props.dispatch({
         type: "LOGIN_SUCCESS",
         payload: getData.data.data,
       });
 
       localStorage.setItem("token", response.data.data.token);
-      props.handleCloseLogin();
       if (props.state.user.status === "admin") {
         history.push("/list");
-        props.handleCloseLogin();
       }
+      props.handleCloseLogin();
     } catch (error) {
       setErrorAlert(true);
       setTimeout(() => {

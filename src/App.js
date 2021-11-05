@@ -29,7 +29,7 @@ const App = () => {
           payload: getData.data.data,
         });
       } catch (error) {
-        return null;
+        console.log(error);
       }
     };
     checkUser();

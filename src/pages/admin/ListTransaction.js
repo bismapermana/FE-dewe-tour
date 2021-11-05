@@ -8,7 +8,7 @@ const ListTransaction = () => {
     <div>
       <NavbarComp />
       <div className="d-flex justify-content-center py-5 ">
-        <div style={{ width: "1200px", height: "100vh" }}>
+        <div style={{ width: "1200px", minHeight: "100vh" }}>
           <TableTransaction />
         </div>
       </div>

@@ -39,8 +39,6 @@ const CardContent = () => {
     }).format(price);
   };
 
-  console.log(image);
-
   return (
     <div style={{ marginTop: "100px" }}>
       <Container className=" px-5 pb-5" fluid>
@@ -92,7 +90,7 @@ const CardContent = () => {
                     <Card.Body className="align-item-center">
                       <div className="imageContainer">
                         <Image
-                          src={item.image}
+                          src={`http://localhost:5000/uploads/${image[i][0]}`}
                           className="mb-2 imageStyle rounded "
                           style={{ marginTop: "-11px" }}
                         />

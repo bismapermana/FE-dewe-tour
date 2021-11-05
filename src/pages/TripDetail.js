@@ -14,8 +14,7 @@ import { API } from "../config/api";
 
 const TripDetail = () => {
   const { id } = useParams();
-  //const detailData = data.find((item) => item.id === parseInt(id));
-  const [trip, setTrip] = useState({});
+  const [trip, setTrip] = useState([]);
   const [quantity, setQuantity] = useState(1);
 
   const getTripDetail = async () => {
@@ -23,7 +22,6 @@ const TripDetail = () => {
       const response = await API.get(`/trips/${id}`);
 
       setTrip(response.data.data);
-      console.log(trip);
     } catch (error) {
       console.log(error);
     }
@@ -75,6 +73,8 @@ const TripDetail = () => {
       console.log(error);
     }
   };
+
+  console.log(trip);
 
   return (
     <div>

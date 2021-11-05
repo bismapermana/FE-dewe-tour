@@ -10,8 +10,11 @@ const ModalApprove = (props) => {
       {props.showModal && (
         <div>
           <div onClick={props.handleClose} className="overlay-modal" />
-          <div className=" pb-5 container-modal">
-            <Card style={{ width: "1050px", height: "570px" }}>
+          <div>
+            <Card
+              className=" pb-5 container-modal"
+              style={{ width: "1050px", height: "570px" }}
+            >
               <Container className="m-3 w-100">
                 <Row className="d-flex justify-content-between">
                   <Col md={4}>
