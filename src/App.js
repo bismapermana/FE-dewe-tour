@@ -35,6 +35,8 @@ const App = () => {
     checkUser();
   }, [dispatch]);
 
+  console.log(state);
+
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <BrowserRouter>
@@ -59,6 +61,7 @@ const App = () => {
                     <Route exact path="/detail/:id" component={TripDetail} />
                     <Route exact path="/profile" component={UserProfile} />
                     <Route exact path="/payment" component={Payment} />
+                    <Route component={PageNotFound} />
                   </Switch>
                 ) : (
                   //-------------------------------------IS ADMIN -----------------------------------

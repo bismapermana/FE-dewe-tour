@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Image } from "react-bootstrap";
 import { BiSearch } from "react-icons/bi";
 import { API } from "../../config/api";
 import ModalApprove from "../molecules/modals/ModalApprove";
+import "./TableTransaction.css";
 
 const TableTransaction = () => {
   const [showModal, setShowModal] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  const handleShow = () => setShowModal(true);
+  const [data, setData] = useState({});
   const handleClose = () => setShowModal(false);
 
   const getTransactions = async () => {
@@ -19,17 +20,26 @@ const TableTransaction = () => {
     }
   };
 
+  const handleShow = (item) => {
+    setShowModal(true);
+    setData(item);
+  };
+
   useEffect(() => {
     getTransactions();
   }, []);
 
-  console.log(transactions);
-
   return (
     <div>
-      <Table striped bordered hover>
+      <Table
+        striped
+        bordered
+        hover
+        variant="light"
+        style={{ textAlign: "center" }}
+      >
         <thead>
-          <tr>
+          <tr style={{ fontSize: "20px" }}>
             <th>No</th>
             <th>Users</th>
             <th>Trip</th>
@@ -40,13 +50,34 @@ const TableTransaction = () => {
         </thead>
         <tbody>
           {transactions.map((item, index) => (
-            <tr>
-              <td>{index}</td>
+            <tr style={{ fontSize: "15px" }}>
+              <td>{index + 1}</td>
               <td>{item.users.fullName}</td>
-              <td>6D / 4N Fun Tassie Vacation </td>
-              <td>bca.jpg</td>
-              <td>Approve</td>
-              <td onClick={handleShow}>
+              <td>{item.trips.title}</td>
+              <td>
+                <Image
+                  src={item.attachment}
+                  style={{ maxWidth: "50px", maxHeight: "30px" }}
+                />
+              </td>
+              <td>
+                {item.status !== "waiting for payment" &&
+                item.status !== "waiting to approve" ? (
+                  <p className="text-green" rounded>
+                    {item.status}
+                  </p>
+                ) : item.status !== "waiting to approve" &&
+                  item.status !== "approved" ? (
+                  <p className="text-red" rounded>
+                    {item.status}
+                  </p>
+                ) : (
+                  <p className="text-yellow" rounded>
+                    {item.status}
+                  </p>
+                )}
+              </td>
+              <td onClick={() => handleShow(item)}>
                 <BiSearch
                   size={"2em"}
                   style={{ color: "#2FC5F7", cursor: "pointer" }}
@@ -56,8 +87,12 @@ const TableTransaction = () => {
           ))}
         </tbody>
       </Table>
-
-      <ModalApprove showModal={showModal} handleClose={handleClose} />
+      <ModalApprove
+        data={data}
+        showModal={showModal}
+        handleClose={handleClose}
+        getTransactions={() => getTransactions()}
+      />
     </div>
   );
 };

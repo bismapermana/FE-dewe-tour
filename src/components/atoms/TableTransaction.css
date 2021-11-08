@@ -1,0 +1,15 @@
+.text-red {
+  font-size: 15px;
+  font-weight: 800;
+  color: #f71e1e;
+}
+.text-yellow {
+  font-size: 15px;
+  font-weight: 800;
+  color: #c2af00;
+}
+.text-green {
+  font-size: 15px;
+  font-weight: 800;
+  color: #42e701;
+}

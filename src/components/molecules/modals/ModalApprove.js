@@ -1,188 +1,173 @@
 import React from "react";
 import logo from "../../../assets/Logo.png";
-import { Card, Container, Row, Col, Image, Button } from "react-bootstrap";
-import barcode from "../../../assets/barcode.png";
+import {
+  Table,
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Modal,
+} from "react-bootstrap";
 import "./ModalApprove.css";
+import { API } from "../../../config/api";
+import approved from "../../../assets/approved.png";
+
+const formatPrice = (price) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    minimumFractionDigits: 0,
+  }).format(price);
+};
 
 const ModalApprove = (props) => {
+  const handleApprove = async () => {
+    try {
+      const response = await API.patch("/transactions/" + props.data.id);
+      props.getTransactions();
+      props.handleClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {props.showModal && (
-        <div>
-          <div onClick={props.handleClose} className="overlay-modal" />
-          <div>
-            <Card
-              className=" pb-5 container-modal"
-              style={{ width: "1050px", height: "570px" }}
-            >
-              <Container className="m-3 w-100">
-                <Row className="d-flex justify-content-between">
-                  <Col md={4}>
-                    <Image src={logo} rounded fluid className=" mt-2" />
-                  </Col>
-                  <Col md={5}></Col>
-                  <Col md={3}>
-                    <p style={{ fontWeight: "800", fontSize: "36px" }}>
-                      Booking
-                    </p>
-                    <p style={{ color: "#878787" }} clasName="text-right">
-                      <b>Saturday</b>, 22 July 2021{" "}
-                    </p>
-                  </Col>
-                </Row>
-                <Row className="d-flex justify-content-between">
-                  <Col md={5}>
-                    <p className="text-title">6D/4N Fun Tassie Vacation</p>
-                    <p className="text-information">Australia</p>
-                  </Col>
-                  <Col md={4}>
-                    <div className="d-flex ">
-                      <div className="mr-5">
-                        <p className="text-description">Date Trip</p>
-                        <p className="text-information">26 August 2021</p>
-                      </div>
-                      <div>
-                        <p className="text-description">Duration</p>
-                        <p className="text-information">6 Day 4 Night</p>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col md={3}>
-                    <Image src={barcode} fluid style={{ marginLeft: "20px" }} />
-                  </Col>
-                </Row>
-                <Row className="d-flex justify-content-between">
-                  <Col md={5}>
-                    <span className="text-status-waiting" rounded>
-                      Waiting Payment
-                    </span>
-                  </Col>
-                  <Col md={4}>
-                    <div className="d-flex ">
-                      <div className="mr-5">
-                        <p className="text-description">Accomodation</p>
-                        <p className="text-information">Hotel 4 nights</p>
-                      </div>
-                      <div style={{ marginLeft: "-30px" }}>
-                        <p className="text-description">Transportation</p>
-                        <p className="text-information">Qatar Airways</p>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col md={3}>
-                    <p style={{ marginLeft: "35px" }}>
-                      <b>TCK0101</b>
-                    </p>
-                  </Col>
-                </Row>
-                <Row className="d-flex justify-content-between mt-5">
-                  <Col md={1}>
-                    <p className="text-description">No</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-description">Full Name</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-description">Gender</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-description">Phone</p>
-                  </Col>
-                  <Col md={5}></Col>
-                </Row>
-                <hr
-                  style={{
-                    border: "1px solid #b7b7b7",
-                    marginLeft: "-32px",
-                    marginTop: "-5px",
-                  }}
+        <Modal show={props.showModal} onHide={props.handleClose} size="xl">
+          <Container className="py-3">
+            <Row className="d-flex justify-content-between">
+              <Col md={4}>
+                <Image src={logo} rounded fluid className=" mt-2" />
+              </Col>
+              <Col md={5}></Col>
+              <Col md={3}>
+                <p style={{ fontWeight: "800", fontSize: "36px" }}>Booking</p>
+                <p style={{ color: "#878787" }} clasName="text-right">
+                  <b>Saturday</b>, 22 July 2021{" "}
+                </p>
+              </Col>
+            </Row>
+            <div className="d-flex flex-row mt-4 mx-3">
+              <div style={{ width: "50%", height: "200px" }}>
+                <p className="text-title">{props.data.trips.title}</p>
+                <p className="text-information">
+                  {props.data.trips.countries.name}
+                </p>
+                {props.data.status !== "waiting for payment" &&
+                props.data.status !== "waiting to approve" ? (
+                  <p className="text-status-green" rounded>
+                    {props.data.status}
+                  </p>
+                ) : props.data.status !== "waiting to approve" &&
+                  props.data.status !== "approved" ? (
+                  <p className="text-status-red" rounded>
+                    {props.data.status}
+                  </p>
+                ) : (
+                  <p className="text-status-yellow" rounded>
+                    {props.data.status}
+                  </p>
+                )}
+              </div>
+              <div style={{ width: "30%", height: "200px" }}>
+                <div>
+                  <p className="text-description">Date Trip</p>
+                  <p className="text-information">
+                    {new Date(props.data.trips.dateTrip).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className="">
+                  <p className="text-description">Accomodation</p>
+                  <p className="text-information">
+                    {props.data.trips.accomodation}
+                  </p>
+                </div>
+              </div>
+              <div style={{ width: "35%", height: "200px" }}>
+                <div>
+                  <p className="text-description">Duration</p>
+                  <p className="text-information">
+                    {props.data.trips.day} Day {props.data.trips.night}
+                    Night
+                  </p>
+                </div>
+                <div>
+                  <p className="text-description">Transportation</p>
+                  <p className="text-information">
+                    {props.data.trips.transportation}
+                  </p>
+                </div>
+              </div>
+              <div style={{ width: "25%", height: "200px" }}>
+                <Image
+                  style={{ maxHeight: "150px", maxWidth: "150px" }}
+                  src={props.data.attachment}
                 />
-                <Row className="d-flex justify-content-between text-left ">
-                  <Col md={1}>
-                    <p className="text-information">1</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-information">John Doe</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-information">Male</p>
-                  </Col>
-                  <Col md={2}>
-                    <p className="text-information">081318804790</p>
-                  </Col>
-                  <Col md={1}>
-                    <p className="text-information" style={{ color: "black" }}>
-                      <b>Qty</b>
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <div className="d-flex">
-                      <p
-                        className="text-information mr-4"
-                        style={{ color: "black" }}
-                      >
-                        <b> : </b>
-                      </p>
-                      <p
-                        className="text-information"
-                        style={{ color: "black" }}
-                      >
-                        <b> 1 </b>
-                      </p>
-                    </div>
-                  </Col>
-                </Row>
-                <hr
-                  style={{
-                    border: "1px solid #b7b7b7",
-                    marginLeft: "-32px",
-                    marginTop: "-5px",
-                  }}
-                />
-                <Row className="d-flex justify-content-between text-left ">
-                  <Col md={1}></Col>
-                  <Col md={2}></Col>
-                  <Col md={2}></Col>
-                  <Col md={2}></Col>
-                  <Col md={1}>
-                    <p className="text-information" style={{ color: "black" }}>
-                      <b>Total</b>
-                    </p>
-                  </Col>
-                  <Col md={3}>
-                    <div className="d-flex">
-                      <p
-                        className="text-information mr-4"
-                        style={{ color: "black" }}
-                      >
-                        <b> : </b>
-                      </p>
-                      <p
-                        className="text-information"
-                        style={{ color: "#FF0000" }}
-                      >
-                        <b> IDR. 12,398,000 </b>
-                      </p>
-                    </div>
-                  </Col>
-                </Row>
-
-                <div className="d-flex justify-content-end mr-5 mt-4">
+              </div>
+            </div>
+            <Table responsive striped>
+              <tbody>
+                <tr>
+                  <th>No</th>
+                  <th>Fullname</th>
+                  <th>Gender</th>
+                  <th>No Phone</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <td>1</td>
+                <td>{props.data.users.fullName}</td>
+                <td>Male</td>
+                <td>{props.data.users.phone}</td>
+                <td></td>
+                <td>
+                  <b>Qty : {props.data.counterQty}</b>{" "}
+                </td>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <b> Total : {formatPrice(props.data.total)} </b>
+                    <br />
+                    <br />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            <div className="d-flex justify-content-end mr-5">
+              {props.data.status !== "approved" ? (
+                <>
                   <div>
                     <Button variant="danger" className="button-style">
                       Cancel
                     </Button>
                   </div>
                   <div>
-                    <Button variant="success" className="button-style mr-5">
+                    <Button
+                      variant="success"
+                      onClick={handleApprove}
+                      className="button-style mr-5"
+                    >
                       Approve
                     </Button>
                   </div>
-                </div>
-              </Container>
-            </Card>
-          </div>
-        </div>
+                </>
+              ) : (
+                <>
+                  <Image
+                    src={approved}
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </>
+              )}
+            </div>
+          </Container>
+        </Modal>
       )}
     </>
   );

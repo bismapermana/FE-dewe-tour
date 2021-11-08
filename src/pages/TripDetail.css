@@ -5,7 +5,7 @@
 
 .text-title {
   font-weight: 900;
-  font-size: 48px;
+  font-size: 80px;
 }
 
 .text-desc {
@@ -28,7 +28,8 @@
 }
 
 .image-thumbnail {
-  width: 333px;
+  max-width: 310px;
+  min-width: 310px;
   height: 167px;
   margin: 5px;
 }

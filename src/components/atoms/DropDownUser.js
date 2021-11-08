@@ -3,6 +3,7 @@ import { Dropdown, Image } from "react-bootstrap";
 import "./DropDownUser.css";
 import bill from "../../assets/bill.png";
 import user from "../../assets/user.png";
+import list from "../../assets/list.png";
 import logout from "../../assets/logout.png";
 import path from "../../assets/path.png";
 import polygon from "../../assets/Polygon.png";
@@ -23,6 +24,11 @@ const DropDownUser = (props) => {
 
   const handleClickTrip = () => {
     history.push("/income");
+    onHide();
+  };
+
+  const handleClickList = () => {
+    history.push("/list");
     onHide();
   };
 
@@ -73,9 +79,19 @@ const DropDownUser = (props) => {
             <div onClick={onHide} className="overlay-dropdown" />
             <div className="container-dropdown-admin rounded shadow">
               <Dropdown.Item onClick={handleClickTrip}>
-                <Image src={path} className="mr-3 mb-1" />
+                <Image src={path} className="mr-3 mb-2" />
                 <span>
                   <b>Trip</b>
+                </span>
+              </Dropdown.Item>
+              <Dropdown.Item onClick={handleClickList}>
+                <Image
+                  src={list}
+                  style={{ width: "30px", width: "30px" }}
+                  className="mr-3"
+                />
+                <span>
+                  <b>List</b>
                 </span>
               </Dropdown.Item>
               <hr style={{ border: "1px #a8a8a8 solid" }} />

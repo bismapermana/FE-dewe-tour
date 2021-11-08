@@ -10,7 +10,7 @@ import SearchBar from "./SearchBar";
 import "./Navbars.css";
 import DropDownUser from "./atoms/DropDownUser";
 
-const NavbarComp = () => {
+const NavbarComp = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -85,7 +85,7 @@ const NavbarComp = () => {
             <h1 style={{ fontWeight: "100", marginBottom: "50px" }}>
               YOUR AMAZING CITY TOGETHER
             </h1>
-            <SearchBar />
+            <SearchBar search={props.search} setSearch={props.setSearch} />
           </div>
         </div>
       ) : (

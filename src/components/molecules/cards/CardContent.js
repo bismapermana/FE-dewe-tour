@@ -5,7 +5,7 @@ import "./CardContent.css";
 import { API } from "../../../config/api";
 import { AuthContext } from "../../../context/AuthContext";
 
-const CardContent = () => {
+const CardContent = (props) => {
   let history = useHistory();
   const [data, setData] = useState([]);
   const [state] = useContext(AuthContext);
@@ -22,6 +22,8 @@ const CardContent = () => {
       alert("Cannot get data");
     }
   };
+
+  console.log(data);
 
   useEffect(() => {
     getData();
@@ -43,83 +45,102 @@ const CardContent = () => {
     <div style={{ marginTop: "100px" }}>
       <Container className=" px-5 pb-5" fluid>
         <Row className="px-5">
-          {data.map((item, i) => (
-            <Col key={i} className="mb-5">
-              {state.user.status === "admin" ? (
-                <Card className="cardContentStyle ">
-                  <div className=" d-flex justify-content-center">
-                    <Card.Body className="align-item-center">
-                      <div className="imageContainer">
-                        <Image
-                          src={`http://localhost:5000/uploads/${image[0]}`}
-                          className="mb-2 imageStyle rounded "
-                          style={{ marginTop: "-11px" }}
-                        />
+          {data
+            .filter((cards) => {
+              if (props.search === "") {
+                return cards;
+              } else if (
+                cards.title.toLowerCase().includes(props.search.toLowerCase())
+              ) {
+                return cards;
+              } else if (
+                cards.countries.name
+                  .toLowerCase()
+                  .includes(props.search.toLowerCase())
+              )
+                return cards;
+            })
+            .map((item, i) => (
+              <Col className="mb-5">
+                {state.user.status === "admin" ? (
+                  <Card className="cardContentStyle ">
+                    <div className=" d-flex justify-content-center">
+                      <Card.Body className="align-item-center">
+                        <div className="imageContainer">
+                          <Image
+                            src={`http://localhost:5000/uploads/${image[i][0]}`}
+                            className="mb-2 imageStyle rounded "
+                            style={{ marginTop: "-11px" }}
+                          />
 
-                        <div className="textImage">10/{item.quota}</div>
-                      </div>
-                      <Card.Title>
-                        <b>{item.title}</b>
-                      </Card.Title>
-                      <Row>
-                        <Col>
-                          <p style={{ color: "#FFAF00" }}>
-                            <b> {formatPrice(item.price)}</b>
-                          </p>
-                        </Col>
-                        <Col>
-                          <p
-                            className="text-right"
-                            style={{ color: "#878787" }}
-                          >
-                            <b>{item.country}</b>
-                          </p>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </div>
-                </Card>
-              ) : (
-                //-------------------------------------- USER ---------------------------------
-                <Card
-                  className="cardContentStyle"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleClickDetail(item.id)}
-                >
-                  <div className=" d-flex justify-content-center">
-                    <Card.Body className="align-item-center">
-                      <div className="imageContainer">
-                        <Image
-                          src={`http://localhost:5000/uploads/${image[i][0]}`}
-                          className="mb-2 imageStyle rounded "
-                          style={{ marginTop: "-11px" }}
-                        />
-                        <div className="textImage">10/{item.quota}</div>
-                      </div>
-                      <Card.Title>
-                        <b>{item.title}</b>
-                      </Card.Title>
-                      <Row>
-                        <Col>
-                          <p style={{ color: "#FFAF00" }}>
-                            <b> {formatPrice(item.price)}</b>
-                          </p>
-                        </Col>
-                        <Col>
-                          <p
-                            className="text-right"
-                            style={{ color: "#878787" }}
-                          >
-                            <b>{item.country}</b>
-                          </p>
-                        </Col>
-                      </Row>
-                    </Card.Body>
-                  </div>
-                </Card>
-              )}
-            </Col>
-          ))}
+                          <div className="textImage">
+                            {item.available}/{item.quota}
+                          </div>
+                        </div>
+                        <Card.Title>
+                          <b>{item.title}</b>
+                        </Card.Title>
+                        <Row>
+                          <Col>
+                            <p style={{ color: "#FFAF00" }}>
+                              <b> {formatPrice(item.price)}</b>
+                            </p>
+                          </Col>
+                          <Col>
+                            <p
+                              className="text-right"
+                              style={{ color: "#878787" }}
+                            >
+                              <b>{item.countries.name}</b>
+                            </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </div>
+                  </Card>
+                ) : (
+                  //-------------------------------------- USER ---------------------------------
+                  <Card
+                    className="cardContentStyle"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => handleClickDetail(item.id)}
+                  >
+                    <div className=" d-flex justify-content-center">
+                      <Card.Body className="align-item-center">
+                        <div className="imageContainer">
+                          <Image
+                            src={`http://localhost:5000/uploads/${image[i][0]}`}
+                            className="mb-2 imageStyle rounded "
+                            style={{ marginTop: "-11px" }}
+                          />
+                          <div className="textImage">
+                            {item.available}/{item.quota}
+                          </div>
+                        </div>
+                        <Card.Title>
+                          <b>{item.title}</b>
+                        </Card.Title>
+                        <Row>
+                          <Col>
+                            <p style={{ color: "#FFAF00" }}>
+                              <b> {formatPrice(item.price)}</b>
+                            </p>
+                          </Col>
+                          <Col>
+                            <p
+                              className="text-right"
+                              style={{ color: "#878787" }}
+                            >
+                              <b>{item.countries.name}</b>
+                            </p>
+                          </Col>
+                        </Row>
+                      </Card.Body>
+                    </div>
+                  </Card>
+                )}
+              </Col>
+            ))}
         </Row>
       </Container>
     </div>

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../components/Footer";
 import CardContent from "../components/molecules/cards/CardContent";
 import CardInformation from "../components/molecules/cards/CardInformation";
 import NavbarComp from "../components/Navbars";
 
-const landing = () => {
+const Landing = () => {
+  const [search, setSearch] = useState("");
+
   return (
     <div>
-      <NavbarComp />
+      <NavbarComp search={search} setSearch={setSearch} />
       <div style={{ marginTop: "-50px", marginBottom: "80px" }}>
         <CardInformation />
       </div>
@@ -17,10 +19,10 @@ const landing = () => {
           <b>Group Tour</b>
         </h1>
       </div>
-      <CardContent />
+      <CardContent search={search} />
       <Footer />
     </div>
   );
 };
 
-export default landing;
+export default Landing;

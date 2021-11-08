@@ -4,7 +4,6 @@ import logo from "../../../assets/Logo.png";
 import "./CardPayment.css";
 import { API } from "../../../config/api";
 import { AuthContext } from "../../../context/AuthContext";
-import CardLoader from "./CardLoader";
 
 const CardPayment = () => {
   const [transaction, setTransaction] = useState([]);
@@ -22,6 +21,8 @@ const CardPayment = () => {
       console.log(error);
     }
   };
+
+  console.log(transaction);
 
   useEffect(() => {
     getTransaction();
@@ -41,9 +42,7 @@ const CardPayment = () => {
         <div>
           {loading === false ? (
             <div className="d-flex justify-content-center mt-5 pb-5">
-              <Card style={{ width: "1050px", height: "480px" }}>
-                <CardLoader />
-              </Card>
+              <Card style={{ width: "1050px", height: "480px" }}></Card>
             </div>
           ) : (
             <div className="d-flex justify-content-center mt-5 pb-5">
@@ -64,30 +63,42 @@ const CardPayment = () => {
                     </Col>
                   </Row>
                   <div className="d-flex flex-row mt-4 mx-3">
-                    <div style={{ width: "30%", height: "200px" }}>
+                    <div style={{ width: "50%", height: "200px" }}>
                       <p className="text-title">{item.trips.title}</p>
                       <p className="text-information">
                         {item.trips.countries.name}
                       </p>
-                      <p className="text-status" rounded>
-                        {item.status}
-                      </p>
+                      {item.status !== "waiting for payment" &&
+                      item.status !== "waiting to approve" ? (
+                        <p className="text-status-green" rounded>
+                          {item.status}
+                        </p>
+                      ) : item.status !== "waiting to approve" &&
+                        item.status !== "approved" ? (
+                        <p className="text-status-red" rounded>
+                          {item.status}
+                        </p>
+                      ) : (
+                        <p className="text-status-yellow" rounded>
+                          {item.status}
+                        </p>
+                      )}
                     </div>
-                    <div style={{ width: "20%", height: "200px" }}>
+                    <div style={{ width: "30%", height: "200px" }}>
                       <div>
                         <p className="text-description">Date Trip</p>
                         <p className="text-information">
-                          {item.trips.dateTrip}
+                          {new Date(item.trips.dateTrip).toLocaleDateString()}
                         </p>
                       </div>
-                      <div className="mt-5">
+                      <div>
                         <p className="text-description">Accomodation</p>
                         <p className="text-information">
                           {item.trips.accomodation}
                         </p>
                       </div>
                     </div>
-                    <div style={{ width: "25%", height: "200px" }}>
+                    <div style={{ width: "35%", height: "200px" }}>
                       <div>
                         <p className="text-description">Duration</p>
                         <p className="text-information">
@@ -103,10 +114,13 @@ const CardPayment = () => {
                       </div>
                     </div>
                     <div style={{ width: "25%", height: "200px" }}>
-                      <Image src="" />
+                      <Image
+                        style={{ maxHeight: "150px", maxWidth: "150px" }}
+                        src={item.attachment}
+                      />
                     </div>
                   </div>
-                  <Table responsive>
+                  <Table responsive striped>
                     <tbody>
                       <tr>
                         <th>No</th>
@@ -121,7 +135,9 @@ const CardPayment = () => {
                       <td>Male</td>
                       <td>{state.user.phone}</td>
                       <td></td>
-                      <td>Qty : {item.counterQty}</td>
+                      <td>
+                        <b>Qty : {item.counterQty} </b>
+                      </td>
                       <tr>
                         <td></td>
                         <td></td>
@@ -129,7 +145,7 @@ const CardPayment = () => {
                         <td></td>
                         <td></td>
                         <td>
-                          Total : {formatPrice(item.total)}
+                          <b> Total : {formatPrice(item.total)} </b>
                           <br />
                           <br />
                         </td>
