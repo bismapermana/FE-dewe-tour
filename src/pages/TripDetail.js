@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import NavbarComp from "../components/Navbars";
 import Footer from "../components/Footer";
 import { API } from "../config/api";
-import DropDownPayment from "../components/atoms/DropDownPayment";
 
 const TripDetail = () => {
   const { id } = useParams();

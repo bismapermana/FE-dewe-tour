@@ -23,15 +23,9 @@ const CardContent = (props) => {
     }
   };
 
-  console.log(data);
-
   useEffect(() => {
     getData();
   }, []);
-
-  const image = data.map((item) => {
-    return JSON.parse(item.image);
-  });
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat("id-ID", {
@@ -60,7 +54,7 @@ const CardContent = (props) => {
               )
                 return cards;
             })
-            .map((item, i) => (
+            .map((item) => (
               <Col className="mb-5">
                 {state.user.status === "admin" ? (
                   <Card className="cardContentStyle ">
@@ -68,7 +62,9 @@ const CardContent = (props) => {
                       <Card.Body className="align-item-center">
                         <div className="imageContainer">
                           <Image
-                            src={`http://localhost:5000/uploads/${image[i][0]}`}
+                            src={`http://localhost:5000/uploads/${
+                              JSON.parse(item.image)?.[0]
+                            }`}
                             className="mb-2 imageStyle rounded "
                             style={{ marginTop: "-11px" }}
                           />
@@ -109,7 +105,9 @@ const CardContent = (props) => {
                       <Card.Body className="align-item-center">
                         <div className="imageContainer">
                           <Image
-                            src={`http://localhost:5000/uploads/${image[i][0]}`}
+                            src={`http://localhost:5000/uploads/${
+                              JSON.parse(item.image)?.[0]
+                            }`}
                             className="mb-2 imageStyle rounded "
                             style={{ marginTop: "-11px" }}
                           />

@@ -80,7 +80,7 @@ const ModalRegister = (props) => {
                 <b>Full Name</b>
               </p>
               <input
-                className="form-style w-100 p-2 rounded form-input"
+                className="form-style w-100 rounded p-2 rounded form-input"
                 type="text"
                 name="fullName"
                 onChange={handleOnChange}

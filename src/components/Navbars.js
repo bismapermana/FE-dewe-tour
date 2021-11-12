@@ -18,6 +18,8 @@ const NavbarComp = (props) => {
   const history = useHistory();
   const [state, dispatch] = useContext(AuthContext);
 
+  console.log(state);
+
   const handleShowLogin = () => setShowLogin(true);
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowRegister = () => setShowRegister(true);
@@ -43,13 +45,25 @@ const NavbarComp = (props) => {
             >
               {state.isLogin === true ? (
                 //------------------- LOGIN --------------------------
-                <Avatar
-                  name={state.user.fullName}
-                  className="rounded-circle"
-                  size="40"
-                  onClick={handleShowDropdown}
-                  style={{ cursor: "pointer" }}
-                />
+                <>
+                  {state.user.profilePicture === null ? (
+                    <Avatar
+                      name={state.user.fullName}
+                      className="rounded-circle"
+                      size="40"
+                      onClick={handleShowDropdown}
+                      style={{ cursor: "pointer" }}
+                    />
+                  ) : (
+                    <Avatar
+                      src={state.user.profilePicture}
+                      className="rounded-circle"
+                      size="40"
+                      onClick={handleShowDropdown}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
+                </>
               ) : (
                 //-----------------------IS NOT LOGIN --------------------------
                 <Nav>
@@ -105,13 +119,25 @@ const NavbarComp = (props) => {
             >
               {state.isLogin === true ? (
                 //----------------------IS LOGIN ----------------------------------
-                <Avatar
-                  name={state.user.fullName}
-                  className="rounded-circle"
-                  size="40"
-                  onClick={handleShowDropdown}
-                  style={{ cursor: "pointer" }}
-                />
+                <>
+                  {state.user.profilePicture === null ? (
+                    <Avatar
+                      name={state.user.fullName}
+                      className="rounded-circle"
+                      size="40"
+                      onClick={handleShowDropdown}
+                      style={{ cursor: "pointer" }}
+                    />
+                  ) : (
+                    <Avatar
+                      src={state.user.profilePicture}
+                      className="rounded-circle"
+                      size="40"
+                      onClick={handleShowDropdown}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
+                </>
               ) : (
                 //----------------------IS NOT LOGIN -------------------------------
                 <Nav>

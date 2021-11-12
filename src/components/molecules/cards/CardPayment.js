@@ -4,6 +4,7 @@ import logo from "../../../assets/Logo.png";
 import "./CardPayment.css";
 import { API } from "../../../config/api";
 import { AuthContext } from "../../../context/AuthContext";
+import notfound from "../../../assets/transactionnotfound.png";
 
 const CardPayment = () => {
   const [transaction, setTransaction] = useState([]);
@@ -36,15 +37,26 @@ const CardPayment = () => {
     }).format(price);
   };
 
+  const filterData = transaction.filter(
+    (item) =>
+      item.status !== "waiting for payment" &&
+      item.status !== "waiting to approve"
+  );
+
   return (
     <>
-      {transaction.map((item) => (
-        <div>
-          {loading === false ? (
-            <div className="d-flex justify-content-center mt-5 pb-5">
-              <Card style={{ width: "1050px", height: "480px" }}></Card>
-            </div>
-          ) : (
+      {filterData.length === 0 ? (
+        <div className="mb-4">
+          <div className="d-flex justify-content-center w-100">
+            <Image src={notfound} />
+          </div>
+          <h2 style={{ textAlign: "center" }}>
+            You have not done any transactions
+          </h2>
+        </div>
+      ) : (
+        filterData.map((item) => (
+          <div>
             <div className="d-flex justify-content-center mt-5 pb-5">
               <Card style={{ width: "1050px", height: "480px" }}>
                 <Container>
@@ -155,9 +167,9 @@ const CardPayment = () => {
                 </Container>
               </Card>
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        ))
+      )}
     </>
   );
 };

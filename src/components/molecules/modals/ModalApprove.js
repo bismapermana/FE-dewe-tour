@@ -12,6 +12,7 @@ import {
 import "./ModalApprove.css";
 import { API } from "../../../config/api";
 import approved from "../../../assets/approved.png";
+import cancel from "../../../assets/cancel.png";
 
 const formatPrice = (price) => {
   return new Intl.NumberFormat("id-ID", {
@@ -24,7 +25,46 @@ const formatPrice = (price) => {
 const ModalApprove = (props) => {
   const handleApprove = async () => {
     try {
-      const response = await API.patch("/transactions/" + props.data.id);
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const approve = {
+        status: "approved",
+      };
+
+      const response = await API.patch(
+        "/transactions/" + props.data.id,
+        approve,
+        config
+      );
+      console.log(response);
+      props.getTransactions();
+      props.handleClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleCancel = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+
+      const approve = {
+        status: "canceled",
+      };
+
+      const response = await API.patch(
+        "/transactions/" + props.data.id,
+        approve,
+        config
+      );
+      console.log(response);
       props.getTransactions();
       props.handleClose();
     } catch (error) {
@@ -56,7 +96,8 @@ const ModalApprove = (props) => {
                   {props.data.trips.countries.name}
                 </p>
                 {props.data.status !== "waiting for payment" &&
-                props.data.status !== "waiting to approve" ? (
+                props.data.status !== "waiting to approve" &&
+                props.data.status !== "canceled" ? (
                   <p className="text-status-green" rounded>
                     {props.data.status}
                   </p>
@@ -140,29 +181,51 @@ const ModalApprove = (props) => {
               </tbody>
             </Table>
             <div className="d-flex justify-content-end mr-5">
-              {props.data.status !== "approved" ? (
+              {props.data.status !== "approved" &&
+              props.data.status !== "canceled" ? (
                 <>
-                  <div>
-                    <Button variant="danger" className="button-style">
-                      Cancel
-                    </Button>
-                  </div>
-                  <div>
-                    <Button
-                      variant="success"
-                      onClick={handleApprove}
-                      className="button-style mr-5"
-                    >
-                      Approve
-                    </Button>
-                  </div>
+                  {props.data.status !== "waiting for payment" ? (
+                    <>
+                      <div>
+                        <Button
+                          onClick={handleCancel}
+                          variant="danger"
+                          className="button-style"
+                        >
+                          Cancel
+                        </Button>
+                      </div>
+                      <div>
+                        <Button
+                          variant="success"
+                          onClick={handleApprove}
+                          className="button-style mr-5"
+                        >
+                          Approve
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                 </>
               ) : (
                 <>
-                  <Image
-                    src={approved}
-                    style={{ width: "100px", height: "100px" }}
-                  />
+                  {props.data.status !== "canceled" ? (
+                    <>
+                      <Image
+                        src={approved}
+                        style={{ width: "100px", height: "100px" }}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Image
+                        src={cancel}
+                        style={{ width: "100px", height: "100px" }}
+                      />
+                    </>
+                  )}
                 </>
               )}
             </div>

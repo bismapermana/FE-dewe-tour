@@ -85,9 +85,6 @@ const AddForm = () => {
     }
   };
 
-  console.log(input);
-  console.log(preview);
-
   return (
     <div>
       <div style={{ paddingBottom: "50px" }}>

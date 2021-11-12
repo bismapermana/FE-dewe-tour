@@ -62,7 +62,8 @@ const TableTransaction = () => {
               </td>
               <td>
                 {item.status !== "waiting for payment" &&
-                item.status !== "waiting to approve" ? (
+                item.status !== "waiting to approve" &&
+                item.status !== "canceled" ? (
                   <p className="text-green" rounded>
                     {item.status}
                   </p>

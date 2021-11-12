@@ -17,8 +17,8 @@ const SearchBar = (props) => {
             type="text"
             style={{ width: "1100px" }}
           />
-          <Button variant="warning" size="lg">
-            Search
+          <Button style={{ color: "white" }} variant="warning" size="lg">
+            <b> Search </b>
           </Button>
         </Form.Group>
       </Form>

@@ -1,0 +1,13 @@
+.image-footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer-style {
+  position: absolute;
+  width: 100%;
+  padding: 1px;
+  background-color: #ffaf00;
+}

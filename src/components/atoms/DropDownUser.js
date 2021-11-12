@@ -85,11 +85,7 @@ const DropDownUser = (props) => {
                 </span>
               </Dropdown.Item>
               <Dropdown.Item onClick={handleClickList}>
-                <Image
-                  src={list}
-                  style={{ width: "30px", width: "30px" }}
-                  className="mr-3"
-                />
+                <Image src={list} style={{ width: "30px" }} className="mr-3" />
                 <span>
                   <b>List</b>
                 </span>

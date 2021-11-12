@@ -17,6 +17,7 @@ import Footer from "../../components/Footer";
 import "./Payment.css";
 import NavbarComp from "../../components/Navbars";
 import DropDownPayment from "../../components/atoms/DropDownPayment";
+import notFound from "../../assets/transactionnotfound.png";
 
 const Payment = () => {
   const [transaction, setTransaction] = useState([]);
@@ -36,7 +37,7 @@ const Payment = () => {
       setTransaction(response.data.data);
       setTimeout(() => {
         setLoading(true);
-      }, 3000);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -80,6 +81,7 @@ const Payment = () => {
         data,
         config
       );
+      console.log(response);
       getTransaction();
       setShowDropdown(true);
     } catch (error) {
@@ -87,192 +89,200 @@ const Payment = () => {
     }
   };
 
+  const filterData = transaction.filter(
+    (item) => item.status !== "approved" && item.status !== "canceled"
+  );
+
   return (
     <>
       <NavbarComp />
-      {transaction.map((item) => (
-        <div className="p-5">
-          <>
-            {loading === false ? (
-              <div className="d-flex justify-content-center mt-5 pb-5">
-                <Card style={{ width: "1050px", height: "350px" }}>
-                  <Container>
-                    <Row className="d-flex justify-content-between pt-3">
-                      <Col md={4}>
-                        <Image src={logo} rounded fluid className=" mt-2" />
-                      </Col>
-                      <Col md={5}></Col>
-                      <Col md={3} style={{ textAlign: "center" }}>
-                        <p style={{ fontWeight: "800", fontSize: "36px" }}>
-                          Booking
-                        </p>
-                        <p style={{ color: "#878787", margin: "-20px" }}>
-                          <b>Saturday</b>, 22 July 2021{" "}
-                        </p>
-                      </Col>
-                    </Row>
-                    <div className="d-flex justify-content-center w-100">
-                      <div>
-                        <Spinner
-                          style={{ width: "100px", height: "100px" }}
-                          variant="light"
-                          animation="grow"
-                        />
-                      </div>
-                    </div>
-                  </Container>
-                </Card>
-              </div>
-            ) : (
+      <div style={{ minHeight: "100vh" }}>
+        {filterData.length === 0 ? (
+          <div className="mb-5">
+            <div className="d-flex w-100 justify-content-center">
+              <Image src={notFound} />
+            </div>
+            <h2 style={{ textAlign: "center" }}>
+              There is no active transaction!
+            </h2>
+          </div>
+        ) : (
+          filterData.map((data) => (
+            <div className="p-5">
               <>
-                <div className="d-flex justify-content-center mt-5 pb-5">
-                  <Card style={{ width: "1050px", height: "550px" }}>
-                    <Container>
-                      <Row className="d-flex justify-content-between pt-3">
-                        <Col md={4}>
-                          <Image src={logo} rounded fluid className=" mt-2" />
-                        </Col>
-                        <Col md={5}></Col>
-                        <Col md={3} style={{ textAlign: "center" }}>
-                          <p style={{ fontWeight: "800", fontSize: "36px" }}>
-                            Booking
-                          </p>
-                          <p style={{ color: "#878787", margin: "-20px" }}>
-                            <b>Saturday</b>, 22 July 2021{" "}
-                          </p>
-                        </Col>
-                      </Row>
-                      <div className="d-flex flex-row mt-4 mx-3">
-                        <div style={{ width: "30%", height: "200px" }}>
-                          <p className="text-title">{item.trips.title}</p>
-                          <p className="text-information">
-                            {item.trips.countries.name}
-                          </p>
-                          {item.status !== "waiting for payment" ? (
-                            <p className="text-status-yellow" rounded>
-                              {item.status}
-                            </p>
-                          ) : (
-                            <p className="text-status-red" rounded>
-                              {item.status}
-                            </p>
-                          )}
-                        </div>
-                        <div style={{ width: "20%", height: "200px" }}>
-                          <div>
-                            <p className="text-description">Date Trip</p>
-                            <p className="text-information">
-                              {new Date(
-                                item.trips.dateTrip
-                              ).toLocaleDateString()}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-description">Accomodation</p>
-                            <p className="text-information">
-                              {item.trips.accomodation}
-                            </p>
-                          </div>
-                        </div>
-                        <div style={{ width: "25%", height: "200px" }}>
-                          <div>
-                            <p className="text-description">Duration</p>
-                            <p className="text-information">
-                              {item.trips.day} Day {item.trips.night}
-                              Night
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-description">Transportation</p>
-                            <p className="text-information">
-                              {item.trips.transportation}
-                            </p>
-                          </div>
-                        </div>
-                        <div style={{ width: "25%", height: "200px" }}>
-                          {preview === null ? (
-                            <form>
-                              <label className="d-flex justify-content-center  ml-5">
-                                <IoDocumentAttachOutline
-                                  size="4em"
-                                  style={{ cursor: "pointer" }}
-                                />
-                                <input
-                                  accept=".jpg,.jpeg,.png,.svg"
-                                  required
-                                  hidden
-                                  name="imageFile"
-                                  type="file"
-                                  onChange={handleOnChange}
-                                />
-                              </label>
-                            </form>
-                          ) : (
-                            <label className="d-flex  justify-content-center  ml-5">
+                {loading === false ? (
+                  <div className="d-flex justify-content-center mt-5 pb-5">
+                    <Spinner
+                      style={{ width: "100px", height: "100px" }}
+                      variant="light"
+                      animation="grow"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <div className="d-flex justify-content-center mt-5 pb-5">
+                      <Card style={{ width: "1050px", height: "550px" }}>
+                        <Container>
+                          <Row className="d-flex justify-content-between pt-3">
+                            <Col md={4}>
                               <Image
-                                src={preview}
-                                style={{
-                                  maxWidth: "150px",
-                                  maxHeight: "150px",
-                                }}
+                                src={logo}
+                                rounded
                                 fluid
+                                className=" mt-2"
                               />
-                            </label>
-                          )}
-                        </div>
-                      </div>
-                      <Table responsive variant="light" striped>
-                        <tbody>
-                          <tr>
-                            <th>No</th>
-                            <th>Fullname</th>
-                            <th>Gender</th>
-                            <th>No Phone</th>
-                            <th></th>
-                            <th></th>
-                          </tr>
-                          <td>1</td>
-                          <td>{state.user.fullName}</td>
-                          <td>Male</td>
-                          <td>{state.user.phone}</td>
-                          <td></td>
-                          <td>
-                            <b>Qty : {item.counterQty}</b>
-                          </td>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                              <b>Total : {formatPrice(item.total)} </b>
-                              <br />
-                              <br />
-                            </td>
-                          </tr>
-                        </tbody>
-                      </Table>
-                    </Container>
-                  </Card>
-                </div>
+                            </Col>
+                            <Col md={5}></Col>
+                            <Col md={3} style={{ textAlign: "center" }}>
+                              <p
+                                style={{ fontWeight: "800", fontSize: "36px" }}
+                              >
+                                Booking
+                              </p>
+                              <p style={{ color: "#878787", margin: "-20px" }}>
+                                <b>Saturday</b>, 22 July 2021{" "}
+                              </p>
+                            </Col>
+                          </Row>
+                          <div className="d-flex flex-row mt-4 mx-3">
+                            <div style={{ width: "30%", height: "200px" }}>
+                              <p className="text-title">{data.trips.title}</p>
+                              <p className="text-information">
+                                {data.trips.countries.name}
+                              </p>
+                              {data.status !== "waiting for payment" ? (
+                                <p className="text-status-yellow" rounded>
+                                  {data.status}
+                                </p>
+                              ) : (
+                                <p className="text-status-red" rounded>
+                                  {data.status}
+                                </p>
+                              )}
+                            </div>
+                            <div style={{ width: "20%", height: "200px" }}>
+                              <div>
+                                <p className="text-description">Date Trip</p>
+                                <p className="text-information">
+                                  {new Date(
+                                    data.trips.dateTrip
+                                  ).toLocaleDateString()}
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-description">Accomodation</p>
+                                <p className="text-information">
+                                  {data.trips.accomodation}
+                                </p>
+                              </div>
+                            </div>
+                            <div style={{ width: "25%", height: "200px" }}>
+                              <div>
+                                <p className="text-description">Duration</p>
+                                <p className="text-information">
+                                  {data.trips.day} Day {data.trips.night}
+                                  Night
+                                </p>
+                              </div>
+                              <div>
+                                <p className="text-description">
+                                  Transportation
+                                </p>
+                                <p className="text-information">
+                                  {data.trips.transportation}
+                                </p>
+                              </div>
+                            </div>
+                            <div style={{ width: "25%", height: "200px" }}>
+                              {preview === null ? (
+                                <form>
+                                  <label className="d-flex justify-content-center  ml-5">
+                                    <IoDocumentAttachOutline
+                                      size="4em"
+                                      style={{ cursor: "pointer" }}
+                                    />
+                                    <input
+                                      accept=".jpg,.jpeg,.png,.svg"
+                                      required
+                                      hidden
+                                      name="imageFile"
+                                      type="file"
+                                      onChange={handleOnChange}
+                                    />
+                                  </label>
+                                </form>
+                              ) : (
+                                <label className="d-flex  justify-content-center  ml-5">
+                                  <Image
+                                    src={preview}
+                                    style={{
+                                      maxWidth: "150px",
+                                      maxHeight: "150px",
+                                    }}
+                                    fluid
+                                  />
+                                </label>
+                              )}
+                            </div>
+                          </div>
+                          <Table responsive variant="light" striped>
+                            <tbody>
+                              <tr>
+                                <th>No</th>
+                                <th>Fullname</th>
+                                <th>Gender</th>
+                                <th>No Phone</th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                              <td>1</td>
+                              <td>{state.user.fullName}</td>
+                              <td>Male</td>
+                              <td>{state.user.phone}</td>
+                              <td></td>
+                              <td>
+                                <b>Qty : {data.counterQty}</b>
+                              </td>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                  <b>Total : {formatPrice(data.total)} </b>
+                                  <br />
+                                  <br />
+                                </td>
+                              </tr>
+                            </tbody>
+                          </Table>
+                        </Container>
+                      </Card>
+                    </div>
+                    {data.status === "waiting for payment" ? (
+                      <Button
+                        style={{
+                          marginLeft: "100px",
+                          width: "150px",
+                          color: "white",
+                        }}
+                        variant="warning"
+                        onClick={() => handleSubmit(data?.id)}
+                      >
+                        PAY
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
               </>
-            )}
-          </>
-          {item.status === "waiting for payment" ? (
-            <Button
-              style={{ marginLeft: "100px", width: "150px", color: "white" }}
-              variant="warning"
-              onClick={() => handleSubmit(item?.id)}
-            >
-              PAY
-            </Button>
-          ) : (
-            <></>
-          )}
-        </div>
-      ))}
-      <Footer />
+            </div>
+          ))
+        )}
+      </div>
+      <Footer style={{ minHeight: "1000vh" }} />
       <DropDownPayment
         showDropdown={showDropdown}
         handleCloseDropdown={handleCloseDropdown}

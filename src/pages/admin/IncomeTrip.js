@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
-import CardContent from "../../components/molecules/cards/CardContent";
 import { Button, Container, Row, Col, Image, Card } from "react-bootstrap";
 import { useHistory } from "react-router";
 import NavbarComp from "../../components/Navbars";
 import Footer from "../../components/Footer";
+import ModalAddCountry from "../../components/molecules/modals/ModalAddCountry";
 import { API } from "../../config/api";
 
 const IncomeTrip = () => {
   const history = useHistory();
   const [data, setData] = useState([]);
+  const [showModalCountry, setShowModalCountry] = useState(false);
+
   const handleClick = () => {
     history.push("/addtrip");
   };
+
+  const handleShowModal = () => setShowModalCountry(true);
+  const handleCloseModal = () => setShowModalCountry(false);
 
   const getData = async () => {
     try {
@@ -49,14 +54,24 @@ const IncomeTrip = () => {
         <h1>
           <b>Income Trip</b>
         </h1>
-        <Button
-          variant="warning"
-          className="px-5"
-          style={{ color: "white" }}
-          onClick={handleClick}
-        >
-          <b> Add Trip</b>
-        </Button>
+        <div>
+          <Button
+            variant="warning"
+            className="px-5"
+            style={{ color: "white", width: "200px" }}
+            onClick={handleClick}
+          >
+            <b> Add Trip</b>
+          </Button>
+          <Button
+            variant="warning"
+            className="px-5 ml-3"
+            style={{ color: "white", width: "200px" }}
+            onClick={handleShowModal}
+          >
+            <b> Add Country</b>
+          </Button>
+        </div>
       </div>
       <div style={{ marginTop: "100px" }}>
         <Container className=" px-5 pb-5" fluid>
@@ -102,6 +117,10 @@ const IncomeTrip = () => {
           </Row>
         </Container>
       </div>
+      <ModalAddCountry
+        handleCloseModal={handleCloseModal}
+        showModalCountry={showModalCountry}
+      />
       <Footer />
     </div>
   );
