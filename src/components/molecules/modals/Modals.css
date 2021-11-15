@@ -1,0 +1,145 @@
+.text-modal-title {
+  font-weight: 700;
+}
+
+.form-input {
+  border: #d2d2d2 2px !important;
+  background-color: #d2d2d2;
+}
+
+.text-button {
+  color: #ffff;
+  font-weight: 700;
+}
+
+.text-modal {
+  font-weight: 400;
+  color: #b1b1b1;
+}
+
+.modal-style {
+  background-color: #e5e5e5;
+}
+
+.background-palm {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+}
+.background-hibiscus {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 100px;
+  height: 100px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.text-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.text-information {
+  font-size: 14px;
+  font-weight: 600;
+  color: #959595;
+  margin-top: -10px;
+  text-align: left;
+}
+
+.text-description {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.text-status-approve {
+  font-size: 12px;
+  font-weight: 800;
+  color: #3cf71e;
+  background: linear-gradient(
+    rgba(59, 247, 30, 0.157),
+    rgba(11, 220, 95, 0.178)
+  );
+  padding: 5px 10px;
+}
+
+.text-status-waiting {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ec7a7a;
+  background: linear-gradient(#ec7a7a73, #ec7a7a48);
+  padding: 5px 10px;
+}
+
+.border-line {
+  border: #b7b7b7 2px 50%;
+}
+
+.button-style {
+  color: white !important;
+  width: 120px !important;
+}
+
+.overlay-modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.1);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.container-modal {
+  position: absolute;
+  right: 0;
+  bottom: 140px;
+  left: 0;
+  margin: auto;
+  z-index: 2;
+}
+
+.modal-size {
+  width: 90%;
+}
+
+.text-status-red {
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-block;
+  color: #f71e1e;
+  background: linear-gradient(
+    rgba(247, 30, 30, 0.157),
+    rgba(220, 11, 56, 0.178)
+  );
+  padding: 5px 10px;
+}
+.text-status-yellow {
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-block;
+  color: #e7eb00;
+  background: linear-gradient(
+    rgba(243, 247, 30, 0.157),
+    rgba(220, 217, 11, 0.178)
+  );
+  padding: 5px 10px;
+}
+.text-status-green {
+  font-size: 12px;
+  font-weight: 800;
+  display: inline-block;
+  color: #5bf71e;
+  background: linear-gradient(
+    rgba(55, 247, 30, 0.157),
+    rgba(11, 220, 21, 0.178)
+  );
+  padding: 5px 10px;
+}

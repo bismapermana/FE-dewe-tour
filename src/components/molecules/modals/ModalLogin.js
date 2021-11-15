@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Form, Button, Image, Alert } from "react-bootstrap";
 import { useHistory } from "react-router";
-import "./Modal.css";
+import "./Modals.css";
 import palm from "../../../assets/palm.png";
 import hibiscus from "../../../assets/hibiscus.png";
 import { API, setAuthToken } from "../../../config/api";
@@ -99,11 +99,18 @@ const ModalSignin = (props) => {
               variant="warning"
               className="w-100 mt-4 py-2 btn-style"
               type="submit"
+              style={{ color: "white" }}
             >
-              Sign In
+              <b>Sign In</b>
             </Button>
             <p className="text-center pt-3 text-modal">
-              Don't Have an Account? Click <b>here</b>
+              Don't Have an Account? Click{" "}
+              <b
+                onClick={props.handleShowRegister}
+                style={{ cursor: "pointer" }}
+              >
+                here
+              </b>
             </p>
           </Form>
         </Modal.Body>

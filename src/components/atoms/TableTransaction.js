@@ -30,7 +30,7 @@ const TableTransaction = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mb-5">
       <Table
         striped
         bordered

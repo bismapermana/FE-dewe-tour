@@ -136,11 +136,15 @@ const ModalRegister = (props) => {
               variant="warning"
               onClick={handleOnRegister}
               className="w-100 mt-4 p-2 btn-style"
+              style={{ color: "white" }}
             >
-              Sign up
+              <b>Sign up </b>
             </Button>
             <p className="text-center pt-3 text-modal">
-              Don't Have an Account? Click <b>here</b>
+              Already Have an Account? Click{" "}
+              <b onClick={props.handleShowLogin} style={{ cursor: "pointer" }}>
+                here
+              </b>
             </p>
           </Form>
         </Modal.Body>

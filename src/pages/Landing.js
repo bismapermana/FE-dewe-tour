@@ -19,7 +19,9 @@ const Landing = () => {
           <b>Group Tour</b>
         </h1>
       </div>
-      <CardContent search={search} />
+      <div>
+        <CardContent search={search} />
+      </div>
       <Footer />
     </div>
   );

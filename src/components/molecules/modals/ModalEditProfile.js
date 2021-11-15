@@ -7,10 +7,11 @@ import {
   Col,
   Container,
   Button,
+  Alert,
 } from "react-bootstrap";
 import profile from "../../../assets/inputUser.png";
 import { API } from "../../../config/api";
-import "./Modal.css";
+import "./Modals.css";
 
 const ModalEditProfile = (props) => {
   const [preview, setPreview] = useState(null);
@@ -21,6 +22,8 @@ const ModalEditProfile = (props) => {
     address: "",
     imageFile: "",
   });
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [alert, setAlert] = useState(false);
 
   const handleOnChange = (e) => {
     setInput({
@@ -56,7 +59,12 @@ const ModalEditProfile = (props) => {
       props.handleCloseModal();
       console.log(response);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
+      setErrorMessage(error.response.data);
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 2000);
     }
   };
 
@@ -68,6 +76,11 @@ const ModalEditProfile = (props) => {
         size="lg"
       >
         <Container className="w-100 p-5">
+          {alert && (
+            <Alert variant="danger" style={{ height: "50px" }}>
+              <p>{errorMessage.message}</p>
+            </Alert>
+          )}
           <Form>
             <Row>
               <Col md={8}>

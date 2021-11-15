@@ -35,8 +35,6 @@ const App = () => {
     checkUser();
   }, [dispatch]);
 
-  console.log(state);
-
   return (
     <div style={{ backgroundColor: "#E5E5E5" }}>
       <BrowserRouter>

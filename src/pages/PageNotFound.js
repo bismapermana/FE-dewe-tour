@@ -8,7 +8,7 @@ const PageNotFound = () => {
   return (
     <div>
       <NavbarComp />
-      <div className="d-flex justify-content-center my-5">
+      <div className="d-flex justify-content-center mt-5">
         <div>
           <Image src={image} style={{ width: "500px" }} />
           <h1 style={{ textAlign: "center", color: "orange" }} className="mt-5">

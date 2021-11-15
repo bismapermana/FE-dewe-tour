@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Form, Button, Alert } from "react-bootstrap";
 import { API } from "../../../config/api";
-import "./Modal.css";
+import "./Modals.css";
 
 const ModalAddCountry = (props) => {
   const [form, setForm] = useState({ name: "" });
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState([]);
 
   const handleOnChange = (e) => {
     setForm({
@@ -12,8 +14,6 @@ const ModalAddCountry = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-
-  console.log(form);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +27,12 @@ const ModalAddCountry = (props) => {
       console.log(response);
       props.handleCloseModal();
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
+      setErrorMessage(error.response.data);
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2000);
     }
   };
 
@@ -39,6 +44,11 @@ const ModalAddCountry = (props) => {
         onHide={props.handleCloseModal}
       >
         <Modal.Body>
+          {error && (
+            <Alert variant="danger" style={{ height: "50px" }}>
+              <p>{errorMessage.message}</p>
+            </Alert>
+          )}
           <Form>
             <input
               className="w-100 mb-2 p-2 form-input form-style"

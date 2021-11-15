@@ -199,7 +199,7 @@ const TripDetail = () => {
                         variant="warning"
                         className="mr-4  button-text"
                         onClick={decrement}
-                        style={{ width: "40px" }}
+                        style={{ width: "40px", color: "white" }}
                       >
                         <b>-</b>
                       </Button>
@@ -210,7 +210,7 @@ const TripDetail = () => {
                         variant="warning"
                         className="ml-4  button-text"
                         onClick={increment}
-                        style={{ width: "40px" }}
+                        style={{ width: "40px", color: "white" }}
                       >
                         <b>+</b>
                       </Button>

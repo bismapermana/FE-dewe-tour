@@ -9,22 +9,34 @@ import ModalRegister from "./molecules/modals/ModalRegister";
 import SearchBar from "./SearchBar";
 import "./Navbars.css";
 import DropDownUser from "./atoms/DropDownUser";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import DropDownNotification from "./atoms/DropDownNotification";
 
 const NavbarComp = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdownNotification, setShowDropdownNotification] =
+    useState(false);
   const { pathname } = useLocation();
   const history = useHistory();
   const [state, dispatch] = useContext(AuthContext);
 
-  console.log(state);
-
-  const handleShowLogin = () => setShowLogin(true);
+  const handleShowLogin = () => {
+    setShowLogin(true);
+    setShowRegister(false);
+  };
   const handleCloseLogin = () => setShowLogin(false);
-  const handleShowRegister = () => setShowRegister(true);
+  const handleShowRegister = () => {
+    setShowRegister(true);
+    setShowLogin(false);
+  };
   const handleCloseRegister = () => setShowRegister(false);
   const handleShowDropdown = () => setShowDropdown(true);
+  const handleShowDropdownNotification = () =>
+    setShowDropdownNotification(true);
+  const handleCloseDropdownNotification = () =>
+    setShowDropdownNotification(false);
 
   return (
     <div>
@@ -46,6 +58,12 @@ const NavbarComp = (props) => {
               {state.isLogin === true ? (
                 //------------------- LOGIN --------------------------
                 <>
+                  <IoIosNotificationsOutline
+                    size="2em"
+                    color="orange"
+                    className="mr-3"
+                    onClick={handleShowDropdownNotification}
+                  />
                   {state.user.profilePicture === null ? (
                     <Avatar
                       name={state.user.fullName}
@@ -72,8 +90,9 @@ const NavbarComp = (props) => {
                       variant="outline-light"
                       className="px-4 py-1"
                       onClick={handleShowLogin}
+                      style={{ color: "white" }}
                     >
-                      Sign In
+                      <b>Sign In </b>
                     </Button>
                   </Nav.Link>
                   <Nav.Link eventKey={2}>
@@ -82,8 +101,9 @@ const NavbarComp = (props) => {
                       style={{ color: "black" }}
                       className="px-4 py-1"
                       onClick={handleShowRegister}
+                      style={{ color: "white" }}
                     >
-                      Sign Up
+                      <b>Sign Up</b>
                     </Button>
                   </Nav.Link>
                 </Nav>
@@ -172,11 +192,13 @@ const NavbarComp = (props) => {
         handleCloseLogin={handleCloseLogin}
         dispatch={dispatch}
         state={state}
+        handleShowRegister={handleShowRegister}
       />
       <ModalRegister
         showRegister={showRegister}
         handleShowRegister={handleShowRegister}
         handleCloseRegister={handleCloseRegister}
+        handleShowLogin={handleShowLogin}
       />
 
       <DropDownUser
@@ -184,6 +206,10 @@ const NavbarComp = (props) => {
         setShowDropdown={setShowDropdown}
         dispatch={dispatch}
         state={state}
+      />
+      <DropDownNotification
+        showDropdownNotification={showDropdownNotification}
+        handleCloseDropdownNotification={handleCloseDropdownNotification}
       />
     </div>
   );

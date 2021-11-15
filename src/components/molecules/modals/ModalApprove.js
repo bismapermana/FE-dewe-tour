@@ -9,7 +9,7 @@ import {
   Button,
   Modal,
 } from "react-bootstrap";
-import "./ModalApprove.css";
+import "./Modals.css";
 import { API } from "../../../config/api";
 import approved from "../../../assets/approved.png";
 import cancel from "../../../assets/cancel.png";

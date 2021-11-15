@@ -10,12 +10,10 @@ const DropDownPayment = (props) => {
         show={props.showDropdown}
         onHide={props.handleCloseDropdown}
       >
-        <Modal.Header>
-          <Modal.Title>
-            Your payment will be confrimed within 1 x 24 hours To see orders
-            Click <b>here</b> Thank You!
-          </Modal.Title>
-        </Modal.Header>
+        <p style={{ fontWeight: "500", fontSize: "20px" }}>
+          Your payment will be confrimed within 1 x 24 hours To see orders Click{" "}
+          <b>here</b> Thank You!
+        </p>
       </Modal>
     </div>
   );

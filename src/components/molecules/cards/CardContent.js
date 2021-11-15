@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 import { useHistory } from "react-router";
-import "./CardContent.css";
+import "./Cards.css";
 import { API } from "../../../config/api";
 import { AuthContext } from "../../../context/AuthContext";
 

@@ -3,7 +3,7 @@ import { Card, Col, Container, Row, Image, Button } from "react-bootstrap";
 import { CgProfile } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { IoMdCall, IoIosPin } from "react-icons/io";
-import "./CardUser.css";
+import "./Cards.css";
 import profile from "../../../assets/inputUser.png";
 import { API } from "../../../config/api";
 import ModalEditProfile from "../modals/ModalEditProfile";

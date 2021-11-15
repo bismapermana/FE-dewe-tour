@@ -7,7 +7,6 @@ import {
   Row,
   Col,
   Table,
-  Spinner,
 } from "react-bootstrap";
 import logo from "../../assets/Logo.png";
 import { IoDocumentAttachOutline } from "react-icons/io5";
@@ -97,28 +96,31 @@ const Payment = () => {
     <>
       <NavbarComp />
       <div style={{ minHeight: "100vh" }}>
-        {filterData.length === 0 ? (
-          <div className="mb-5">
-            <div className="d-flex w-100 justify-content-center">
-              <Image src={notFound} />
-            </div>
-            <h2 style={{ textAlign: "center" }}>
-              There is no active transaction!
-            </h2>
+        {loading === false ? (
+          <div className="d-flex justify-content-center mt-5 pb-5">
+            <div
+              className="loader"
+              style={{
+                position: "absolute",
+                top: "50%",
+                bottom: "50%",
+              }}
+            />
           </div>
         ) : (
-          filterData.map((data) => (
-            <div className="p-5">
-              <>
-                {loading === false ? (
-                  <div className="d-flex justify-content-center mt-5 pb-5">
-                    <Spinner
-                      style={{ width: "100px", height: "100px" }}
-                      variant="light"
-                      animation="grow"
-                    />
-                  </div>
-                ) : (
+          <div style={{ minHeight: "100vh" }}>
+            {filterData.length === 0 ? (
+              <div className="mb-5">
+                <div className="d-flex w-100 justify-content-center">
+                  <Image src={notFound} />
+                </div>
+                <h2 style={{ textAlign: "center" }}>
+                  There is no active transaction!
+                </h2>
+              </div>
+            ) : (
+              filterData.map((data) => (
+                <div className="p-5">
                   <>
                     <div className="d-flex justify-content-center mt-5 pb-5">
                       <Card style={{ width: "1050px", height: "550px" }}>
@@ -194,34 +196,48 @@ const Payment = () => {
                               </div>
                             </div>
                             <div style={{ width: "25%", height: "200px" }}>
-                              {preview === null ? (
-                                <form>
-                                  <label className="d-flex justify-content-center  ml-5">
-                                    <IoDocumentAttachOutline
-                                      size="4em"
-                                      style={{ cursor: "pointer" }}
-                                    />
-                                    <input
-                                      accept=".jpg,.jpeg,.png,.svg"
-                                      required
-                                      hidden
-                                      name="imageFile"
-                                      type="file"
-                                      onChange={handleOnChange}
-                                    />
-                                  </label>
-                                </form>
-                              ) : (
-                                <label className="d-flex  justify-content-center  ml-5">
+                              {data.attachment !== null ? (
+                                <div className="d-flex justify-content-center ml-5">
                                   <Image
-                                    src={preview}
+                                    src={data.attachment}
                                     style={{
-                                      maxWidth: "150px",
                                       maxHeight: "150px",
+                                      maxWidth: "150px",
                                     }}
-                                    fluid
                                   />
-                                </label>
+                                </div>
+                              ) : (
+                                <>
+                                  {preview === null ? (
+                                    <form>
+                                      <label className="d-flex justify-content-center  ml-5">
+                                        <IoDocumentAttachOutline
+                                          size="4em"
+                                          style={{ cursor: "pointer" }}
+                                        />
+                                        <input
+                                          accept=".jpg,.jpeg,.png,.svg"
+                                          required
+                                          hidden
+                                          name="imageFile"
+                                          type="file"
+                                          onChange={handleOnChange}
+                                        />
+                                      </label>
+                                    </form>
+                                  ) : (
+                                    <label className="d-flex  justify-content-center  ml-5">
+                                      <Image
+                                        src={preview}
+                                        style={{
+                                          maxWidth: "150px",
+                                          maxHeight: "150px",
+                                        }}
+                                        fluid
+                                      />
+                                    </label>
+                                  )}
+                                </>
                               )}
                             </div>
                           </div>
@@ -276,13 +292,13 @@ const Payment = () => {
                       <></>
                     )}
                   </>
-                )}
-              </>
-            </div>
-          ))
+                </div>
+              ))
+            )}
+          </div>
         )}
       </div>
-      <Footer style={{ minHeight: "1000vh" }} />
+      <Footer />
       <DropDownPayment
         showDropdown={showDropdown}
         handleCloseDropdown={handleCloseDropdown}

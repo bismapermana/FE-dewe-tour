@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Col, Container, Row, Image } from "react-bootstrap";
-import "./CardInformation.css";
+import "./Cards.css";
 import iconAgent from "../../../assets/iconAgent.png";
 import iconLike from "../../../assets/iconLike.png";
 import iconCs from "../../../assets/iconCs.png";

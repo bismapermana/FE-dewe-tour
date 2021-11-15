@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Card, Container, Image, Row, Col, Table } from "react-bootstrap";
 import logo from "../../../assets/Logo.png";
-import "./CardPayment.css";
+import "./Cards.css";
 import { API } from "../../../config/api";
 import { AuthContext } from "../../../context/AuthContext";
 import notfound from "../../../assets/transactionnotfound.png";
@@ -46,12 +46,12 @@ const CardPayment = () => {
   return (
     <>
       {filterData.length === 0 ? (
-        <div className="mb-4">
+        <div style={{ minHeight: "100vh" }}>
           <div className="d-flex justify-content-center w-100">
             <Image src={notfound} />
           </div>
           <h2 style={{ textAlign: "center" }}>
-            You have not done any transactions
+            You have not done any transactions yet
           </h2>
         </div>
       ) : (
