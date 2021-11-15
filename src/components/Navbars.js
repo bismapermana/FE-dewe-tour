@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Nav, Navbar, Image, Button } from "react-bootstrap";
 import { useLocation, useHistory } from "react-router";
 import { AuthContext } from "../context/AuthContext";
@@ -10,8 +10,10 @@ import SearchBar from "./SearchBar";
 import "./Navbars.css";
 import DropDownUser from "./atoms/DropDownUser";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { io } from "socket.io-client";
 import DropDownNotification from "./atoms/DropDownNotification";
 
+let socket;
 const NavbarComp = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -21,6 +23,15 @@ const NavbarComp = (props) => {
   const { pathname } = useLocation();
   const history = useHistory();
   const [state, dispatch] = useContext(AuthContext);
+
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+
+    console.log(socket);
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const handleShowLogin = () => {
     setShowLogin(true);

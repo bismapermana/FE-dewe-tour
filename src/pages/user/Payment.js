@@ -36,7 +36,7 @@ const Payment = () => {
       setTransaction(response.data.data);
       setTimeout(() => {
         setLoading(true);
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
